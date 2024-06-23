@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule a Meeting</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="hamburger-menu" onclick="toggleSidebar()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
+        <a href="profile.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="Profile Icon">
+            <span>Profile</span>
+        </a>
+        <a href="home.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/home.png" alt="Home Icon">
+            <span>Home</span>
+        </a>
+        <a href="library.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/book.png" alt="My Library Icon">
+            <span>My Library</span>
+        </a>
+        <a href="cart.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/shopping-cart.png" alt="My Cart Icon">
+            <span>My Cart</span>
+        </a>
+        <div class="sidebar-item discover">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/search.png" alt="Discover Icon">
+            <span>Discover</span>
+            <div class="dropdown-content">
+                <a href="events.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/calendar.png" alt="Events Icon">Events</a>
+                <a href="facility.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/building.png" alt="Facility Icon">Facility</a>
+                <a href="contact.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/contacts.png" alt="Contact Icon">Contact</a>
+            </div>
+        </div>
+        <a href="ask.html" class="sidebar-item ask">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/communication.png" alt="Ask Icon">
+            <span>Ask</span>
+        </a>
+    </div>
+    <div class="main-content">
+        <div class="meeting-main-content">
+            <div class="meeting-header">
+                <div class="meeting-search-container">
+                    <a href="liboptions.html"><button class="meeting-all-books-button">Back</button></a>
+                    <input type="text" class="booklib-search-input" placeholder="Search in My Library...">
+                    <button class="meeting-search-button"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <h1>Schedule a meeting</h1>
+            <input type="text" class="meeting-large-input" id="meetingTitle" placeholder="Enter meeting title...">
+            <h2>Meeting Room Number</h2>
+            <div class="meeting-room-number">
+                <select id="meetingRoom">
+                    <option value="" disabled selected>Select room number...</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+            <h2>Choose Time</h2>
+            <div class="meeting-time-selection">
+                <div class="meeting-date-picker">
+                    <input type="date" id="meetingDate" placeholder="Select Date...">
+                </div>
+                <div class="meeting-time-dropdowns">
+                    <select id="meetingTime">
+                        <option value="" disabled selected>Select time...</option>
+                        <option>9:00 am</option>
+                        <option>10:00 am</option>
+                        <option>11:00 am</option>
+                        <option>12:00 pm</option>
+                        <option>1:00 pm</option>
+                        <option>2:00 pm</option>
+                    </select>
+                    <select id="meetingDuration">
+                        <option value="" disabled selected>Select duration...</option>
+                        <option>10 min</option>
+                        <option>20 min</option>
+                        <option>30 min</option>
+                        <option>40 min</option>
+                        <option>50 min</option>
+                        <option>1 hour</option>
+                    </select>
+                </div>
+            </div>
+            <button class="schedule-button">Schedule Meeting</button>
+        </div>
+    </div>
+
+    <div class="modal" id="notificationModal">
+        <div class="modal-content">
+            <span class="close-button" id="closeModal">&times;</span>
+            <p id="modalMessage"></p>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script >
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('open');
+        }
+
+        document.addEventListener('click', function(event) {
+            const sidebar = document.querySelector('.sidebar');
+            const hamburger = document.querySelector('.hamburger-menu');
+            if (!sidebar.contains(event.target) && !hamburger.contains(event.target)) {
+                sidebar.classList.remove('open');
+            }
+        });
+
+         
+//meeting room things , json 
+let meetings = JSON.parse(localStorage.getItem('meetings')) || [];
+
+document.querySelector('.schedule-button').addEventListener('click', function() {
+    var title = document.getElementById('meetingTitle').value;
+    var room = document.getElementById('meetingRoom').value;
+    var date = document.getElementById('meetingDate').value;
+    var time = document.getElementById('meetingTime').value;
+    var duration = document.getElementById('meetingDuration').value;
+
+    var modalMessage = '';
+
+    if (!title || !room || !date || !time || !duration) {
+        modalMessage = 'Please fill out all fields to schedule the meeting.';
+    } else {
+        // Check for scheduling conflicts
+        var conflict = meetings.some(meeting => meeting.room === room && meeting.date === date && meeting.time === time);
+        if (conflict) {
+            modalMessage = 'A meeting is already scheduled in this room at this time. Please choose a different time or room.';
+        } else {
+            // Add the new meeting to the array
+            meetings.push({ title, room, date, time, duration });
+            // Save the updated meetings array to localStorage
+            localStorage.setItem('meetings', JSON.stringify(meetings));
+            modalMessage = 'Meeting scheduled successfully!';
+        }
+    }
+
+    document.getElementById('modalMessage').textContent = modalMessage;
+    document.getElementById('notificationModal').style.display = 'flex';
+});
+
+document.getElementById('closeModal').addEventListener('click', function() {
+    document.getElementById('notificationModal').style.display = 'none';
+});
+
+window.addEventListener('click', function(event) {
+    if (event.target == document.getElementById('notificationModal')) {
+        document.getElementById('notificationModal').style.display = 'none';
+    }
+});
+
+// book not working here 
+document.addEventListener('DOMContentLoaded', () => {
+    const books = JSON.parse(localStorage.getItem('books')) || [];
+
+    function openForm() {
+        document.getElementById('booklibForm').style.display = 'flex';
+    }
+
+    function closeForm() {
+        document.getElementById('booklibForm').style.display = 'none';
+    }
+
+    function addBook(title, author, isbn, publishDate, attachment, summary) {
+        const book = { title, author, isbn, publishDate, attachment, summary };
+        const bookExists = books.some(b => b.title === title && b.author === author);
+
+        if (bookExists) {
+            alert('The book is already in the list.');
+            return;
+        }
+
+        books.push(book);
+        localStorage.setItem('books', JSON.stringify(books));
+        displayBooks();
+        closeForm();
+    }
+
+    function displayBooks() {
+        const booksGrid = document.querySelector('.booklib-books-grid');
+        booksGrid.innerHTML = `
+            <div class="booklib-book add-book" onclick="openForm()">
+                <p>Add book</p>
+                <button>+</button>
+            </div>
+        `;
+        books.forEach(book => {
+            const bookElement = document.createElement('div');
+            bookElement.classList.add('booklib-book');
+            bookElement.innerHTML = `
+                <img src="${book.attachment}" alt="${book.title}">
+                <p>${book.title}</p>
+            `;
+            booksGrid.appendChild(bookElement);
+        });
+    }
+
+    document.getElementById('booklib-attachment-input').addEventListener('change', function() {
+        const fileName = this.files[0].name;
+        document.getElementById('booklib-attachment-text').value = fileName;
+    });
+
+    document.querySelector('.booklib-publish-button').addEventListener('click', () => {
+        const title = document.querySelector('.booklib-form-body input[placeholder="Book Title"]').value;
+        const author = document.querySelector('.booklib-form-body input[placeholder="Author Name"]').value;
+        const isbn = document.querySelector('.booklib-form-body input[placeholder="ISBN"]').value;
+        const publishDate = document.querySelector('.booklib-form-body input[placeholder="Date / Month / Year"]').value;
+        const attachment = document.getElementById('booklib-attachment-text').value;
+        const summary = document.querySelector('.booklib-form-body textarea').value;
+
+        if (!title || !author || !isbn || !publishDate || !attachment || !summary) {
+            alert('Please fill out all fields.');
+            return;
+        }
+
+        addBook(title, author, isbn, publishDate, attachment, summary);
+    });
+
+    window.openForm = openForm;
+    window.closeForm = closeForm;
+    displayBooks();
+});
+
+    </script>
+</body>
+</html>

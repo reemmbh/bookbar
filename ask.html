@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="hamburger-menu" id="hamburger-menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
+        <a href="profile.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="Profile Icon">
+            <span>Profile</span>
+        </a>
+        <a href="home.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/home.png" alt="Home Icon">
+            <span>Home</span>
+        </a>
+        <a href="library.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/book.png" alt="My Library Icon">
+            <span>My Library</span>
+        </a>
+        <a href="cart.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/shopping-cart.png" alt="My Cart Icon">
+            <span>My Cart</span>
+        </a>
+        <div class="sidebar-item discover">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/search.png" alt="Discover Icon">
+            <span>Discover</span>
+            <div class="dropdown-content">
+                <a href="events.html">
+                    <img src="https://img.icons8.com/ios-filled/24/ffffff/calendar.png" alt="Events Icon">Events</a>
+                
+                <a href="facility.html">
+                    <img src="https://img.icons8.com/ios-filled/24/ffffff/building.png" alt="Facility Icon">Facility</a>
+            
+                <a href="contact.html">
+                    <img src="https://img.icons8.com/ios-filled/24/ffffff/contacts.png" alt="Contact Icon">Contact</a>
+            </div>
+        </div>
+        <a href="ask.html" class="sidebar-item ask">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/communication.png" alt="Ask Icon">
+            <span>Ask</span>
+        </a>
+    </div>
+    <div class="chat-container">
+        <h1>AI Chat</h1>
+        <div class="chat-welcome">
+            <h2>Welcome to AI Bot</h2>
+            <p>Get Started and ask any question you want</p>
+        </div>
+        <div class="chat-options">
+            <div class="chat-option-row">
+                <div class="chat-option">
+                    <i class="fa fa-paperclip"></i>
+                    <span>Attachment</span>
+                </div>
+                <div class="chat-option">
+                    <i class="fa fa-question-circle"></i>
+                    <span>Question</span>
+                </div>
+            </div>
+            <div class="chat-option-row">
+                <div class="chat-option">
+                    <i class="fa fa-code"></i>
+                    <span>Code</span>
+                </div>
+                <div class="chat-option">
+                    <i class="fa fa-picture-o"></i>
+                    <span>Image</span>
+                </div>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="Type your message...">
+            <button type="submit"><i class="fa fa-paper-plane"></i></button>
+        </div>
+    </div>
+    <script>
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const sidebar = document.getElementById('sidebar');
+
+        hamburgerMenu.addEventListener('click', (event) => {
+            sidebar.classList.toggle('open');
+            event.stopPropagation();
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!sidebar.contains(event.target) && !hamburgerMenu.contains(event.target)) {
+                sidebar.classList.remove('open');
+            }
+        });
+
+        sidebar.addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
+    </script>
+</body>
+</html>

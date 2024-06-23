@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
+        <a href="profile.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="Profile Icon">
+            <span>Profile</span>
+        </a>
+        <a href="home.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/home.png" alt="Home Icon">
+            <span>Home</span>
+        </a>
+        <a href="library.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/book.png" alt="My Library Icon">
+            <span>My Library</span>
+        </a>
+        <a href="cart.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/shopping-cart.png" alt="My Cart Icon">
+            <span>My Cart</span>
+        </a>
+        <div class="sidebar-item discover">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/search.png" alt="Discover Icon">
+            <span>Discover</span>
+            <div class="dropdown-content">
+                <a href="events.html">
+                    <img src="https://img.icons8.com/ios-filled/24/ffffff/calendar.png" alt="Events Icon">Events</a>
+                <a href="facility.html">
+                    <img src="https://img.icons8.com/ios-filled/24/ffffff/building.png" alt="Facility Icon">Facility</a>
+                <a href="contact.html">
+                    <img src="https://img.icons8.com/ios-filled/24/ffffff/contacts.png" alt="Contact Icon">Contact</a>
+            </div>
+        </div>
+        <a href="ask.html" class="sidebar-item ask">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/communication.png" alt="Ask Icon">
+            <span>Ask</span>
+        </a>
+    </div>
+    <div class="hamburger-menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <div class="event-container">
+        <div class="event-h1"><h1>Events</h1></div>
+        <div class="carousel">
+            <div class="carousel-item" onclick="showForm()"><img src="images/event8.jpeg" alt="Event 1"></div>
+            <div class="carousel-item" onclick="showForm()"><img src="images/event2.jpeg" alt="Event 2"></div>
+            <div class="carousel-item" onclick="showForm()"><img src="images/event5.jpeg" alt="Event 3"></div>
+        </div>
+    </div>
+
+    <!-- Modal Form -->
+    <div id="modalForm" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeForm()">&times;</span>
+            <h2>Event Registration</h2>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" required>
+                <input type="submit" value="Register">
+            </form>
+        </div>
+    </div>
+    <script >
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const sidebar = document.querySelector('.sidebar');
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+        
+            hamburgerMenu.addEventListener('click', () => {
+                sidebar.classList.toggle('open');
+            });
+        
+            document.addEventListener('click', (e) => {
+                if (!sidebar.contains(e.target) && !hamburgerMenu.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            });
+        });
+        
+        function showForm() {
+            document.getElementById('modalForm').style.display = 'flex';
+        }
+        
+        function closeForm() {
+            document.getElementById('modalForm').style.display = 'none';
+        }
+// scripts.js
+
+document.addEventListener('DOMContentLoaded', () => {
+    let angle = 0;
+    const items = document.querySelectorAll('.carousel-item');
+    const numItems = items.length;
+
+    setInterval(() => {
+        angle += 360 / numItems;
+        items.forEach((item, index) => {
+            const currentAngle = angle + (index * 360 / numItems);
+            item.style.transform = `rotateY(${currentAngle}deg) translateZ(300px)`;
+        });
+    }, 2000);
+});
+// scripts.js
+function showForm() {
+    document.getElementById('modalForm').style.display = 'flex';
+}
+
+function closeForm() {
+    document.getElementById('modalForm').style.display = 'none';
+}
+
+// Close the modal when the user clicks anywhere outside of the modal
+window.onclick = function(event) {
+    if (event.target == document.getElementById('modalForm')) {
+        document.getElementById('modalForm').style.display = 'none';
+    }
+}        
+    </script>
+</body>
+</html>

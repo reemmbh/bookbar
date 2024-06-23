@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Bar - Event Request</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="view-request.css">
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
+        <a href="profile.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="Profile Icon">
+            <span>Profile</span>
+        </a>
+        <a href="home.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/home.png" alt="Home Icon">
+            <span>Home</span>
+        </a>
+        <a href="library.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/book.png" alt="My Library Icon">
+            <span>My Library</span>
+        </a>
+        <a href="cart.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/shopping-cart.png" alt="My Cart Icon">
+            <span>My Cart</span>
+        </a>
+        <div class="sidebar-item discover">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/search.png" alt="Discover Icon">
+            <span>Discover</span>
+            <div class="dropdown-content">
+                <a href="events.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/calendar.png" alt="Events Icon">Events</a>
+                <a href="facility.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/building.png" alt="Facility Icon">Facility</a>
+                <a href="contact.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/contacts.png" alt="Contact Icon">Contact</a>
+            </div>
+        </div>
+        <a href="ask.html" class="sidebar-item ask">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/communication.png" alt="Ask Icon">
+            <span>Ask</span>
+        </a>
+    </div>
+    <div class="hamburger-menu" id="hamburger-menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <div class="view-request-container">
+        <div class="customersupport-header">
+            <a href="adminopt.html"> <button class="customersupport-back-button">Back</button></a>
+        </div>
+        <div class="event-request">
+            <h2>Event Request</h2>
+            <div class="event-item">
+                <div class="event-details">
+                    <h3>Sharjah International Book Fair</h3>
+                    <p>Date: 22 October 2024</p>
+                    <p>The Sharjah International Book Fair (SIBF) is one of the world's premier literary events, held annually in Sharjah. It offers not only a general reading, literary, cultural exchange, and support for education, but also a wide range of cultural events, including book signings, panel discussions, and lectures. The event features local and international authors, publishers, and literary professionals, making it a must-attend event for book lovers.</p>
+                </div>
+                <div>
+                    <button class="accept-btn" onclick="handleClick(event, 'accepted')">Accept</button>
+                    <button class="reject-btn" onclick="handleClick(event, 'rejected')">Reject</button>
+                </div>
+            </div>
+            <div class="event-item">
+                <div class="event-details">
+                    <h3>UAE Book Expo</h3>
+                    <p>Date: 10 November 2024</p>
+                    <p>The UAE Book Expo is a major event that includes book exhibits, author signings, and other book-related activities. It brings together a vast audience of authors, publishers, and readers, providing a platform for book lovers to meet their favorite authors, discover new books, and engage in discussions about literature. The expo is a celebration of the written word and a vital event for the publishing industry.</p>
+                </div>
+                <div>
+                    <button class="accept-btn" onclick="handleClick(event, 'accepted')">Accept</button>
+                    <button class="reject-btn" onclick="handleClick(event, 'rejected')">Reject</button>
+                </div>
+            </div>
+            <div class="event-item">
+                <div class="event-details">
+                    <h3>Sibneel Annual Book Fair</h3>
+                    <p>Date: 15 December 2024</p>
+                    <p>The Sibneel Annual Book Fair is a major cultural event dedicated to books and reading. It typically spreads over several days and features a wide selection of books, from bestsellers to niche genres. The fair includes author signings, literary workshops, and educational programs for children and adults. It is a key event for anyone interested in literature and culture, offering a unique opportunity to meet authors and engage in literary discussions.</p>
+                </div>
+                <div>
+                    <button class="accept-btn" onclick="handleClick(event, 'accepted')">Accept</button>
+                    <button class="reject-btn" onclick="handleClick(event, 'rejected')">Reject</button>
+                </div>
+            </div>
+            <div class="event-item">
+                <div class="event-details">
+                    <h3>Museum</h3>
+                    <p>Date: 25 June 2024</p>
+                    <p>Museums are institutions that collect, preserve, and display objects of historical, cultural, artistic, or scientific significance. Museums aim to spread knowledge and education, offering the public an opportunity to learn about the past, present, and future. Through exhibits and interactive displays, museums make history and science accessible to everyone, providing valuable educational experiences for people of all ages.</p>
+                </div>
+                <div>
+                    <button class="accept-btn" onclick="handleClick(event, 'accepted')">Accept</button>
+                    <button class="reject-btn" onclick="handleClick(event, 'rejected')">Reject</button>
+                </div>
+            </div>
+        </div>
+        <div class="live-request">
+            <h2>Live Request</h2>
+            <div class="live-item">
+                <div class="event-details">
+                    <h3>Sam wants to open a flea</h3>
+                    <p>Date: 17 June 2024</p>
+                    <p>Sam wants to open a flea market as a community event, to help artisans and sellers from across the region showcase their goods. Through these events, it aims to bring local culture to life, providing a space where people can come together to share stories, traditions, and products. Flea markets are a great way to support small businesses and create a vibrant community atmosphere.</p>
+                </div>
+                <div>
+                    <button class="accept-btn" onclick="handleClick(event, 'accepted')">Accept</button>
+                    <button class="reject-btn" onclick="handleClick(event, 'rejected')">Reject</button>
+                </div>
+            </div>
+            <div class="live-item">
+                <div class="event-details">
+                    <h3>Essam wants to open a flea</h3>
+                    <p>Date: 18 June 2024</p>
+                    <p>Essam wants to open a flea market to offer a unique shopping experience and a platform for showcasing handcrafted items and vintage goods. Flea markets serve as hubs for local artisans, giving them a chance to reach a wider audience and engage directly with customers. Essam's vision is to create a space where creativity and commerce intersect, offering visitors a chance to find unique, one-of-a-kind items.</p>
+                </div>
+                <div>
+                    <button class="accept-btn" onclick="handleClick(event, 'accepted')">Accept</button>
+                    <button class="reject-btn" onclick="handleClick(event, 'rejected')">Reject</button>
+                </div>
+            </div>
+            <div class="live-item">
+                <div class="event-details">
+                    <h3>Ahmed wants to open a flea</h3>
+                    <p>Date: 19 June 2024</p>
+                    <p>Ahmed wants to open a flea market, promoting local artisans and fostering community spirit. By setting up bazaars in various locations, the initiative aims to bring local culture to life. Flea markets, with their eclectic mix of products, are designed to engage the community, attract visitors, and support small businesses. Ahmed's vision is to offer a unique shopping experience that highlights the creativity and diversity of local artisans, while also contributing to the local economy.</p>
+                </div>
+                <div>
+                    <button class="accept-btn" onclick="handleClick(event, 'accepted')">Accept</button>
+                    <button class="reject-btn" onclick="handleClick(event, 'rejected')">Reject</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="notification" class="notification"></div>
+    <script>
+        function handleClick(event, status) {
+            const notification = document.getElementById('notification');
+            const eventItem = event.target.closest('.event-item') || event.target.closest('.live-item');
+            const eventName = eventItem.querySelector('h3').innerText;
+            notification.innerText = `${eventName} has been ${status}.`;
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+            const hamburgerMenu = document.getElementById('hamburger-menu');
+            const sidebar = document.getElementById('sidebar');
+        
+            hamburgerMenu.addEventListener('click', () => {
+                sidebar.classList.toggle('open');
+            });
+        
+    </script>
+</body>
+</html>

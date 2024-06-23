@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Children Books</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    .sidebar {
+        width: 200px;
+        height: 100vh;
+        background-color: #D6536D;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 20px;
+        position: fixed;
+        overflow: hidden;
+    }
+
+    .sidebar-item.discover {
+        position: relative;
+    }
+
+    .dropdown-content a img {
+        margin-right: 10px;
+        width: 19px;
+        height: 19px;
+        margin-bottom: -4px;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #D6536D;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        top: 100%;
+        left: 0;
+    }
+
+    .dropdown-content a {
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #d94462;
+    }
+
+    .sidebar-item.discover:hover .dropdown-content {
+        display: block;
+    }
+
+    .logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+        color: white;
+        text-align: center;
+        width: 100%;
+    }
+
+    .logo img {
+        width: 150px;
+        height: 150px;
+        margin-bottom: -10px;
+    }
+
+    .logo span {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .sidebar-item {
+        width: 100%;
+        padding: 10px 15px;
+        display: flex;
+        align-items: center;
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        cursor: pointer;
+        margin-bottom: 5px;
+        width: calc(100% - 20px);
+        padding: 15px 10px;
+    }
+
+    .sidebar-item img {
+        width: 24px;
+        height: 24px;
+        margin-right: 10px;
+    }
+
+    .sidebar-item:hover {
+        background-color: #d94462;
+    }
+
+    .ask {
+        margin-top: auto;
+        margin-bottom: 20px;
+    }
+
+    .main-content {
+        margin-left: 200px;
+        padding: 20px;
+    }
+    .hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.hero-img {
+    width: 240px; /* Adjust the width to make the image larger */
+    height: 230px;
+    border-radius: 8px;
+    margin-left: -100px;
+}
+
+.hero-text {
+    max-width: 400px;
+    text-align: left;
+}
+
+.hero-text h2 {
+    margin: 10px 0;
+    font-size: 24px;
+    color: #333;
+    margin-left: 102px;
+    text-align: center;
+}
+
+.hero-text p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #666;
+    margin-left: 100px;
+    text-align: center;
+}
+
+.hero-text button {
+    padding: 10px 20px;
+    border: black;
+    background-color: #ffffff;
+    color: black;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 200px;
+}
+
+.hero-text button:hover {
+    background-color: #d0d4a8;
+}
+
+    .search-bar {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .search-bar input {
+        padding: 10px;
+        width: 300px;
+        border: 1px solid #ccc;
+    }
+
+    .book-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .book {
+        background-color: white;
+        width: 200px;
+        margin: 10px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .book img {
+        width: 100%;
+        height: auto;
+    }
+
+    .book-title {
+        font-size: 16px;
+        margin: 10px 0;
+        color: #333;
+    }
+
+    .book-price {
+        color: #666;
+        font-size: 14px;
+    }
+
+    .book-rating {
+        color: gold;
+        margin-top: 5px;
+    }
+    
+    .book-link {
+    text-decoration: none; /* Removes the underline */
+    color: inherit; /* Inherits the color from the parent element */
+    }
+
+    .book-link:hover .book-title {
+    color: #000; /* Optional: Change color on hover */
+    }
+</style>
+
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
+        <a href="profile.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="Profile Icon">
+            <span>Profile</span>
+        </a>
+        <a href="home.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/home.png" alt="Home Icon">
+            <span>Home</span>
+        </a>
+        <a href="library.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/book.png" alt="My Library Icon">
+            <span>My Library</span>
+        </a>
+        <a href="cart.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/shopping-cart.png" alt="My Cart Icon">
+            <span>My Cart</span>
+        </a>
+        <div class="sidebar-item discover">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/search.png" alt="Discover Icon">
+            <span>Discover</span>
+            <div class="dropdown-content">
+                <a href="events.html">
+                    <img src="https://img.icons8.com/ios-filled/24/ffffff/calendar.png" alt="Events Icon">Events</a>
+                <a href="facility.html">
+                    <img src="https://img.icons8.com/ios-filled/24/ffffff/building.png" alt="Facility Icon">Facility</a>
+                <a href="contact.html">
+                    <img src="https://img.icons8.com/ios-filled/24/ffffff/contacts.png" alt="Contact Icon">Contact</a>
+            </div>
+        </div>
+        <a href="ask.html" class="sidebar-item ask">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/communication.png" alt="Ask Icon">
+            <span>Ask</span>
+        </a>
+    </div>
+    <div class="library-main-content">
+        <div class="library-club-banner">
+            <img src="images/discover2.jpg" alt="Book Club Banner" class="library-club-banner-img">
+            <div class="library-club-info">
+                <h1>Top Authors LIVE Today</h1>
+                <p>Today's literary landscape is rich and diverse, with exciting voices emerging in every genre. Discover the authors who are making waves in the literary world.</p>
+                <a href="events.html"><button>Discover</button></a>
+            </div>
+        </div>
+            <div class="library-search-bar">
+                <input type="text" placeholder="Search" id="library-search-input">
+                <button type="button" id="voice-search-button"><i class="fa fa-microphone"></i></button>
+                <div class="library-search-buttons">
+                    <button type="button" class="library-search-btn">Books</button>
+                    <button type="button" class="library-search-btn">Authors</button>
+                    <button type="button" class="library-search-btn">Genres</button>
+                    <button type="button" class="library-search-btn">Lists</button>
+                    <button type="button" class="library-search-btn"><i class="fa fa-filter"></i> Filter</button>
+                    <button type="button" class="library-search-btn"><i class="fa fa-sort"></i> Sort</button>
+                    <button type="button" class="library-cart-btn"><i class="fa fa-shopping-cart"></i></button>
+                </div>
+            </div>
+
+        <div class="book-grid">
+            <a href="kidsno1.html" class="book-link">
+            <div class="book">
+                <img src="images/TheGivingTree.jpg" alt="Book 1">
+                <div class="book-title">The Giving Tree</div>
+                <div class="book-price">150 AED</div>
+                <div class="book-rating">★ ★ ★ ★ ☆</div>
+            </div>
+            </a>
+            <a href="kidsno2.html" class="book-link">
+            <div class="book">
+                <img src="images/greeneggsandham.jpg" alt="Book 2">
+                <div class="book-title">Green Eggs and Ham</div>
+                <div class="book-price">200 AED</div>
+                <div class="book-rating">★ ★ ★ ★ ☆</div>
+            </div>
+            </a>
+            <a href="kidsno3.html" class="book-link">
+            <div class="book">
+                <img src="images/charlottesweb.jpg" alt="Book 3">
+                <div class="book-title">Charlotte’s Web</div>
+                <div class="book-price">180 AED</div>
+                <div class="book-rating">★ ★ ★ ★ ☆</div>
+            </div>
+            </a>
+            <a href="kidsno4.html" class="book-link">
+            <div class="book">
+                <img src="images/TheCatintheHat.jpg" alt="Book 4">
+                <div class="book-title">The Cat in the Hat</div>
+                <div class="book-price">120 AED</div>
+                <div class="book-rating">★ ★ ★ ★ ☆</div>
+            </div>
+            </a>
+            <a href="kidsno5.html" class="book-link">
+            <div class="book">
+                <img src="images/WheretheSidewalkEnds.jpg" alt="Book 5">
+                <div class="book-title">Where the Sidewalk Ends</div>
+                <div class="book-price">150 AED</div>
+                <div class="book-rating">★ ★ ★ ★ ★</div>
+            </div>
+            </a>
+            <a href="kidsno6.html" class="book-link">
+            <div class="book">
+                <img src="images/ifyougiveamouse.jpg" alt="Book 6">
+                <div class="book-title">If You Give a Mouse a Cookie</div>
+                <div class="book-price">201 AED</div>
+                <div class="book-rating">★ ★ ★ ★ ☆</div>
+            </div>
+            </a>
+            <a href="kidsno7.html" class="book-link">
+            <div class="book">
+                <img src="images/TheLorax.jpg" alt="Book 7">
+                <div class="book-title">The Lorax</div>
+                <div class="book-price">130 AED</div>
+                <div class="book-rating">★ ★ ★ ☆ ☆</div>
+            </div>
+            </a>
+            <a href="kidsno8.html" class="book-link">
+            <div class="book">
+                <img src="images/Madeline.jpg" alt="Book 8">
+                <div class="book-title">Madeline</div>
+                <div class="book-price">150 AED</div>
+                <div class="book-rating">★ ★ ★ ★ ★</div>
+            </div>
+            </a>
+            <a href="kidsno9.html" class="book-link">
+            <div class="book">
+                <img src="images/HarryPotterandtheSorcerersSton.jpg" alt="Book 9">
+                <div class="book-title">Harry Potter and the Sorcerer's Stone</div>
+                <div class="book-price">130 AED</div>
+                <div class="book-rating">★ ★ ★ ★ ☆</div>
+            </div>
+            </a>
+            <a href="kidsno10.html" class="book-link">
+            <div class="book">
+                <img src="images/TheVelveteenRabbit.jpg" alt="Book 10">
+                <div class="book-title">The Velveteen Rabbit</div>
+                <div class="book-price">107 AED</div>
+                <div class="book-rating">★ ★ ★ ★ ☆</div>
+            </div>
+            </a>
+            <a href="kidsno11.html" class="book-link">
+            <div class="book">
+                <img src="images/howthegrinch.jpg" alt="Book 11">
+                <div class="book-title">How the Grinch Stole Christmas!</div>
+                <div class="book-price">412 AED</div>
+                <div class="book-rating">★ ★ ★ ★ ☆</div>
+            </div>
+            </a>
+            <a href="kidsno12.html" class="book-link">
+            <div class="book">
+                <img src="images/curiousgeorge.jpg" alt="Book 4">
+                <div class="book-title">Curious George</div>
+                <div class="book-price">120 AED</div>
+                <div class="book-rating">★ ★ ★ ★ ☆</div>
+            </div>
+            </a>
+        </div>
+
+        <div class="hero-section">
+            <img src="images/discover.webp" alt="Book Club Banner" class="hero-img">
+            <div class="hero-text">
+                <h2>Discover our Top Authors</h2>
+                <p>Today's literary landscape is rich and diverse, with exciting voices emerging in every genre. Discover the authors who are making waves in the literary world.</p>
+                <a href="events.html"><button>Discover</button></a>
+            </div>
+        </div>
+        <div class="book-grid">
+            <a href="kidsno13.html" class="book-link">
+            <div class="book">
+                <img src="images/TheMonsterattheEndofthisBook.jpg" alt="Book 4">
+                <div class="book-title">The Monster at the End of this Book</div>
+                <div class="book-price">150 AED</div>
+                <div class="book-rating">★ ★ ★ ★ ☆</div>
+            </div>
+            </a>
+            <a href="kidsno14.html" class="book-link">
+            <div class="book">
+                <img src="images/chikachikaboomboom.jpg" alt="Book 4">
+                <div class="book-title">Chicka Chicka Boom Boom</div>
+                <div class="book-price">200 AED</div>
+                <div class="book-rating">★ ★ ★ ★ ☆</div>
+            </div>
+            </a>
+            <a href="kidsno15.html" class="book-link">
+            <div class="book">
+                <img src="images/One FishTwoFish.jpg" alt="Book 4">
+                <div class="book-title">One Fish, Two Fish, Red Fish, Blue Fish</div>
+                <div class="book-price">180 AED</div>
+                <div class="book-rating">★ ★ ★ ★ ☆</div>
+            </div>
+            </a>
+            <a href="kidsno16.html" class="book-link">
+            <div class="book">
+                <img src="images/TheLittlePrince.jpg" alt="Book 4">
+                <div class="book-title">The Little Prince</div>
+                <div class="book-price">120 AED</div>
+                <div class="book-rating">★ ★ ★ ★ ☆</div>
+            </div>
+            </a>
+            <a href="kidsno17.html" class="book-link">
+            <div class="book">
+                <img src="images/Matilda.jpg" alt="Book 4">
+                <div class="book-title">Matilda</div>
+                <div class="book-price">130 AED</div>
+                <div class="book-rating">★ ★ ★ ★ ☆</div>
+            </div>
+            </a>
+            <a href="kidsno18.html" class="book-link">
+            <div class="book">
+                <img src="images/TheTaleofPeterRabbit.jpg" alt="Book 4">
+                <div class="book-title">The Tale of Peter Rabbit</div>
+                <div class="book-price">150 AED</div>
+                <div class="book-rating">★ ★ ★ ★ ☆</div>
+            </div>
+            </a>
+            <a href="kidsno19.html" class="book-link">
+            <div class="book">
+                <img src="images/frogandtoad.jpg" alt="Book 4">
+                <div class="book-title">Frog and Toad Are Friends</div>
+                <div class="book-price">200 AED</div>
+                <div class="book-rating">★ ★ ★ ★ ☆</div>
+            </div>
+            </a>
+            <a href="kidsno20.html" class="book-link">
+            <div class="book">
+                <img src="images/OhthePlacesYoullGo.jpg" alt="Book 4">
+                <div class="book-title">Oh, the Places You’ll Go!</div>
+                <div class="book-price">180 AED</div>
+                <div class="book-rating">★ ★ ★ ★ ☆</div>
+            </div>
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>

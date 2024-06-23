@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Bar - Gulf Business</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            background-color: #D6536D;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-top: 20px;
+            position: fixed;
+            overflow: hidden;
+        }
+
+        .sidebar-item.discover {
+            position: relative;
+        }
+
+        .dropdown-content a img {
+            margin-right: 10px;
+            width: 19px;
+            height: 19px;
+            margin-bottom: -4px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #D6536D;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            top: 100%;
+            left: 0;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #d94462;
+        }
+
+        .sidebar-item.discover:hover .dropdown-content {
+            display: block;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+
+        .logo img {
+            width: 150px;
+            height: 150px;
+            margin-bottom: -10px;
+        }
+
+        .logo span {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .sidebar-item {
+            width: 100%;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-item img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .sidebar-item:hover {
+            background-color: #d94462;
+        }
+
+        .ask {
+            margin-top: auto;
+            margin-bottom: 20px;
+        }
+
+        /* Main content styles */
+        .main-content {
+            width: calc(100% - 220px);
+            margin-left: 220px;
+            padding: 20px;
+        }
+
+        .bookdetails-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .back-button {
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .meeting-search-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #ebe9e1;
+            padding: 10px;
+            width: 100%;
+            border-radius: 10px;
+            border: .5px solid #000;
+        }
+
+        .booklib-search-input {
+            flex-grow: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .meeting-search-button {
+            background-color: #ccc;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .meeting-search-button i {
+            font-size: 16px;
+        }
+
+        .bookdetails-details {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .bookdetails-cover {
+            width: 200px;
+            height: auto;
+            margin-right: 20px;
+        }
+
+        .bookdetails-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bookdetails-info h2 {
+            margin: 0;
+        }
+
+        .tags {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .tags span {
+            background-color: white;
+            color: black;
+            padding: 5px 10px;
+            border-radius: 15px;
+            border: 1px solid black;
+        }
+
+        .reviews {
+            margin: 10px 0;
+        }
+
+        .author-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .author-profile {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .author {
+            margin: 0;
+        }
+
+        .follow-button {
+            background-color: white;
+            color: black;
+            border: 1px solid black;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 15px;
+        }
+
+        .price-cart {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            justify-content: center;
+        }
+
+        .price {
+            font-size: 1.2em;
+        }
+
+        .add-to-cart-button {
+            background-color: green;
+            color: white;
+            border: 1px solid black;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 15px;
+        }
+
+        .content-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .book-info-section {
+            width: 75%;
+        }
+
+        .related-books-section {
+            width: 25%;
+        }
+
+        /* Audio Player */
+        .audio-player {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 20px;
+        }
+
+        .audio-player i {
+            font-size: 2.5em;
+            cursor: pointer;
+        }
+
+        .sound-line {
+            width: 50%;
+            height: 4px;
+            background-color: #ccc;
+            position: relative;
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        .sound-line .circle {
+            width: 12px;
+            height: 12px;
+            background-color: #d6536d;
+            border-radius: 50%;
+            position: absolute;
+            top: -4px;
+            left: 0;
+            cursor: pointer;
+        }
+
+        .related-books {
+            background-color: #ebe9e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .related-books h3 {
+            margin-top: 0;
+        }
+
+        .related-book {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .related-book img {
+            width: 70px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .related-book-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .related-book-title {
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .related-book-description {
+            margin: 5px 0;
+            font-size: small;
+        }
+
+        .review-button {
+            background-color: white;
+            color: black;
+            border: 1px solid black;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 15px;
+            margin-top: 5px;
+        }
+
+       /* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+        position: absolute; /* Ensure the sidebar is above other content */
+        z-index: 1001; /* Make sure it's on top */
+        background-color: #D6536D; /* Match the navbar color */
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .hamburger-menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 30px;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        cursor: pointer;
+        z-index: 1002; /* Ensure it's above the sidebar */
+    }
+
+    .hamburger-menu .bar {
+        width: 100%;
+        height: 3px;
+        background-color: #d94462; /* Make the bars white for contrast */
+    }
+
+    .main-content {
+        width: 100%;
+        margin-left: 0;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .bookdetails-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .meeting-search-container {
+        flex-direction: row;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .booklib-search-input {
+        flex-grow: 1;
+        padding: 5px;
+        font-size: 14px;
+        width: 100%;
+    }
+
+    .meeting-search-button {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+
+    .back-button {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+
+    .content-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .book-info-section,
+    .related-books-section {
+        width: 100%;
+    }
+
+    .bookdetails-details {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .bookdetails-cover {
+        width: 100%;
+        max-width: 200px;
+        margin-bottom: 20px;
+    }
+
+    .bookdetails-info {
+        align-items: center;
+    }
+
+    .author-section {
+        justify-content: center;
+    }
+
+    .price-cart {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .related-books {
+        padding: 10px;
+    }
+
+    .related-book {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .related-book img {
+        margin-bottom: 10px;
+    }
+
+    .related-book-info {
+        align-items: center;
+    }
+
+    .audio-player {
+        flex-direction: row; /* Ensuring the icons are in one line */
+        align-items: center;
+        justify-content: center;
+    }
+
+    .sound-line {
+        width: 80%;
+    }
+
+    .modal-content {
+        width: 90%;
+        padding: 10px;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="hamburger-menu" onclick="toggleSidebar()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    
+    <div class="sidebar">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
+        <a href="profile.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="Profile Icon">
+            <span>Profile</span>
+        </a>
+        <a href="home.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/home.png" alt="Home Icon">
+            <span>Home</span>
+        </a>
+        <a href="library.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/book.png" alt="My Library Icon">
+            <span>My Library</span>
+        </a>
+        <a href="cart.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/shopping-cart.png" alt="My Cart Icon">
+            <span>My Cart</span>
+        </a>
+        <div class="sidebar-item discover">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/search.png" alt="Discover Icon">
+            <span>Discover</span>
+            <div class="dropdown-content">
+                <a href="events.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/calendar.png" alt="Events Icon">Events</a>
+                <a href="facility.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/building.png" alt="Facility Icon">Facility</a>
+                <a href="contact.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/contacts.png" alt="Contact Icon">Contact</a>
+            </div>
+        </div>
+        <a href="ask.html" class="sidebar-item ask">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/communication.png" alt="Ask Icon">
+            <span>Ask</span>
+        </a>
+    </div>
+    <div class="main-content">
+        <div class="bookdetails-header">
+            <div class="meeting-search-container">
+                <a href="magdetails.html"><button class="back-button">Back</button></a>
+                <input type="text" class="booklib-search-input" placeholder="Search in My Library...">
+                <button class="meeting-search-button"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        <div class="content-container">
+            <div class="book-info-section">
+                <div class="bookdetails-details">
+                    <img src="images/mag5.png" alt="Gulf Business Cover" class="bookdetails-cover">
+                    <div class="bookdetails-info">
+                        <h2>Gulf Business</h2>
+                        <div class="tags">
+                            <span>Community</span>
+                            <span>Business</span>
+                            <span>Industry</span>
+                        </div>
+                        <p class="reviews">2k Reviews</p>
+                        <div class="author-section">
+                            <img src="images/author7.jpg" alt="Majid Jafar" class="author-profile">
+                            <p class="author">Majid Jafar</p>
+                            <button class="follow-button">Follow</button>
+                        </div>
+                        <div class="price-cart">
+                            <p class="price">139 AED</p>
+                            <button class="add-to-cart-button" onclick="addToCart()">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="audio-player">
+                    <i class="fas fa-backward"></i>
+                    <i class="fas fa-play" onclick="playAudio()"></i>
+                    <i class="fas fa-forward"></i>
+                </div>
+                <div class="sound-line" id="soundLine">
+                    <div class="circle" id="circle"></div>
+                </div>
+            </div>
+            <div class="related-books-section">
+                <div class="related-books">
+                    <h3>Related Magazines</h3>
+                    <div class="related-book">
+                        <img src="images/mag1.png" alt="Related Magazine Cover">
+                        <div class="related-book-info">
+                            <p class="related-book-title">Forbes Middle East</p>
+                            <p class="related-book-description">Top business and financial news from the Middle East.</p>
+                            <button class="review-button">Review Magazine</button>
+                        </div>
+                    </div>
+                    <div class="related-book">
+                        <img src="images/mag2.png" alt="Related Magazine Cover">
+                        <div class="related-book-info">
+                            <p class="related-book-title">MEED Middle East Economic Digest</p>
+                            <p class="related-book-description">Key economic insights and news in the region.</p>
+                            <button class="review-button">Review Magazine</button>
+                        </div>
+                    </div>
+                    <div class="related-book">
+                        <img src="images/mag3.png" alt="Related Magazine Cover">
+                        <div class="related-book-info">
+                            <p class="related-book-title">Arabian Business</p>
+                            <p class="related-book-description">Business news and insights from the Arabian Peninsula.</p>
+                            <button class="review-button">Review Magazine</button>
+                        </div>
+                    </div>
+                    <div class="related-book">
+                        <img src="images/mag4.png" alt="Related Magazine Cover">
+                        <div class="related-book-info">
+                            <p class="related-book-title">Business Today Middle East</p>
+                            <p class="related-book-description">Comprehensive business news coverage in the Middle East.</p>
+                            <button class="review-button">Review Magazine</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+            function addToCart() {
+                document.getElementById('cartNotification').style.display = 'flex';
+                setTimeout(closeNotification, 3000); // Automatically close after 3 seconds
+            }
+        
+            function closeNotification() {
+                document.getElementById('cartNotification').style.display = 'none';
+            }
+        
+            function playAudio() {
+                window.location.href = 'https://soundcloud.com';
+            }
+        
+            // Sound line functionality
+            const soundLine = document.getElementById('soundLine');
+            const circle = document.getElementById('circle');
+        
+            let isDragging = false;
+        
+            circle.addEventListener('mousedown', (e) => {
+                isDragging = true;
+            });
+        
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+        
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    let rect = soundLine.getBoundingClientRect();
+                    let offsetX = e.clientX - rect.left;
+        
+                    if (offsetX < 0) offsetX = 0;
+                    if (offsetX > rect.width) offsetX = rect.width;
+        
+                    circle.style.left = `${offsetX - (circle.offsetWidth / 2)}px`;
+                }
+            });
+        
+            function toggleSidebar() {
+                const sidebar = document.querySelector('.sidebar');
+                sidebar.classList.toggle('open');
+            }
+            
+            document.addEventListener('click', function (event) {
+                const sidebar = document.querySelector('.sidebar');
+                const hamburger = document.querySelector('.hamburger-menu');
+                if (!sidebar.contains(event.target) && !hamburger.contains(event.target)) {
+                    sidebar.classList.remove('open');
+                }
+            });
+        </script>
+        
+</body>
+
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Bar - Shipment Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* Set the page background to white */
+        }
+
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            background-color: #D6536D;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-top: 20px;
+            position: fixed;
+            overflow: hidden; /* Ensure content doesn't overflow */
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 30px;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger-menu .bar {
+            width: 100%;
+            height: 3px;
+            background-color: pink;
+        }
+
+        .dropdown-content a img {
+            margin-right: 10px; /* Space between icon and text */
+            width: 19px; /* Adjust icon size */
+            height: 19px; /* Adjust icon size */
+            margin-bottom: -4px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #D6536D;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            top: 100%; /* Adjust to position below the Discover item */
+            left: 0;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #d94462;
+        }
+
+        .sidebar-item.discover:hover .dropdown-content {
+            display: block;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+
+        .logo img {
+            width: 150px; /* Increased size */
+            height: 150px; /* Increased size */
+            margin-bottom: -10px;
+        }
+
+        .logo span {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .sidebar-item {
+            width: 100%;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 5px; /* Reduced space between items */
+            width: calc(100% - 20px); /* Adjust width to ensure it fits inside */
+            padding: 15px 10px;
+        }
+
+        .sidebar-item img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .sidebar-item:hover {
+            background-color: #d94462; /* Slightly darker shade */
+        }
+
+        .ask {
+            margin-top: auto;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            margin-left: 200px; /* Adjust to match sidebar width */
+            padding: 20px;
+            background-color: #ffffff; /* Set the container background to white */
+            color: rgb(41, 41, 43);
+            text-align: center;
+            min-height: 100vh; /* Increase container height */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Adjusted alignment */
+        }
+
+        .shipment-container {
+            padding: 20px;
+            background-color: #f7f4ee; /* Match the provided background color */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 600px; /* Make the box wider */
+            margin-top: 50px; /* Move the box down */
+            text-align: left;
+            position: relative;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            background-color: #f7f4ee; /* Match the provided background color */
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            width: 100%;
+        }
+
+        .back-button {
+            background-color: #ffffff; /* Set background color to white */
+            border: none;
+            color: #000000; /* Set text color to black */
+            padding: 8px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-right: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            margin-left: 3cm; /* Move the title to the left by 3cm */
+        }
+
+        form {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .form-group.inline {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .form-group.inline input {
+            width: calc(50% - 10px); /* Adjust width and add space between the inputs */
+        }
+
+        .form-group.inline input:first-child {
+            margin-right: 20px; /* Add space between the input fields */
+        }
+
+        .form-group div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .total span {
+            font-weight: bold;
+        }
+
+        .total button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .total button:hover {
+            background-color: #45a049;
+        }
+
+        .form-section-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .notification {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .notification .success-icon {
+            width: 50px;
+            height: 50px;
+            display: block;
+            margin: 0 auto 10px;
+        }
+
+        .notification .message {
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .notification .close-button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            font-size: 16px;
+            margin: 0 auto;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger-menu {
+                display: flex;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .container {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .shipment-container {
+                width: 100%;
+                padding: 10px;
+                box-shadow: none;
+            }
+
+            .form-group.inline input {
+                width: calc(100% - 10px);
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hamburger-menu" onclick="toggleSidebar()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
+    <div class="sidebar">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
+        <a href="profile.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="Profile Icon">
+            <span>Profile</span>
+        </a>
+        <a href="home.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/home.png" alt="Home Icon">
+            <span>Home</span>
+        </a>
+        <a href="library.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/book.png" alt="My Library Icon">
+            <span>My Library</span>
+        </a>
+        <a href="cart.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/shopping-cart.png" alt="My Cart Icon">
+            <span>My Cart</span>
+        </a>
+        <div class="sidebar-item discover">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/search.png" alt="Discover Icon">
+            <span>Discover</span>
+            <div class="dropdown-content">
+                <a href="events.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/calendar.png" alt="Events Icon">Events</a>
+                <a href="facility.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/building.png" alt="Facility Icon">Facility</a>
+                <a href="contact.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/contacts.png" alt="Contact Icon">Contact</a>
+            </div>
+        </div>
+        <a href="ask.html" class="sidebar-item ask">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/communication.png" alt="Ask Icon">
+            <span>Ask</span>
+        </a>
+    </div>
+    <div class="container">
+        <div class="shipment-container">
+            <div class="header">
+                <button class="back-button" onclick="history.back()">Back</button>
+                <h1>Shipment Details</h1>
+            </div>
+            <form id="shipment-form">
+                <div class="form-group">
+                    <div class="form-section-title">Shipping</div>
+                    <div class="form-group inline">
+                        <input type="text" id="first-name" name="first-name" placeholder="First Name">
+                        <input type="text" id="last-name" name="last-name" placeholder="Last Name">
+                    </div>
+                    <div class="form-group inline">
+                        <input type="text" id="country" name="country" placeholder="Country">
+                        <input type="text" id="city" name="city" placeholder="City">
+                    </div>
+                    <div class="form-group inline">
+                        <input type="text" id="area" name="area" placeholder="Area">
+                        <input type="text" id="phone-number" name="phone-number" placeholder="Phone Number">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Receive Your Order</label>
+                    <div class="radio-group">
+                        <label for="leave-house"><input type="radio" id="leave-house" name="delivery-option" value="house"> Leave At Your House</label>
+                        <label for="leave-work"><input type="radio" id="leave-work" name="delivery-option" value="work"> Leave At Your Work</label>
+                        <label for="pick-up"><input type="radio" id="pick-up" name="delivery-option" value="pickup"> Pick up</label>
+                    </div>
+                </div>
+                <div class="total">
+                    <span>Total: 93$</span>
+                    <button type="button" onclick="showNotification()">Continue</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        <img src="https://img.icons8.com/color/48/000000/ok.png" alt="Success Icon" class="success-icon">
+        <div class="message">Your Order Successfully Placed</div>
+        <button class="close-button" onclick="closeNotification()">Ok</button>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('open');
+        }
+
+        function showNotification() {
+            document.getElementById('notification').style.display = 'block';
+        }
+
+        function closeNotification() {
+            document.getElementById('notification').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

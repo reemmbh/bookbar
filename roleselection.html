@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role Selection</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            background-color: #D6536D;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-top: 20px;
+            position: fixed;
+            transition: width 0.3s;
+        }
+
+        .sidebar-item.discover {
+            position: relative;
+        }
+
+        .dropdown-content a img {
+            margin-right: 10px;
+            width: 19px;
+            height: 19px;
+            margin-bottom: -4px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #D6536D;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            top: 100%;
+            left: 0;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #d94462;
+        }
+
+        .sidebar-item.discover:hover .dropdown-content {
+            display: block;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+
+        .logo img {
+            width: 150px;
+            height: 150px;
+            margin-bottom: -10px;
+        }
+
+        .logo span {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .sidebar-item {
+            width: 100%;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 5px;
+            width: calc(100% - 20px);
+            padding: 15px 10px;
+        }
+
+        .sidebar-item img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .sidebar-item:hover {
+            background-color: #d94462;
+        }
+
+        .ask {
+            margin-top: auto;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .container {
+            margin-left: 200px;
+            padding: 20px;
+            background-color: #ffffff;
+            color: rgb(41, 41, 43);
+            text-align: center;
+            height: 30vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .burger-menu {
+            display: none;
+            font-size: 30px;
+            cursor: pointer;
+            margin-top: 30%;
+            background-color: #ffff;
+            margin: 20px;
+            color: rgb(235, 20, 145);
+        }
+
+        .sidebar.responsive {
+            width: 100%;
+            position: relative;
+        }
+
+        .sidebar.responsive .sidebar-item {
+            float: none;
+            display: block;
+            text-align: left;
+        }
+
+        .role-container {
+            margin-left: 200px;
+            padding: 20px;
+            background-color: white;
+            color: rgb(41, 41, 43);
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .role-selection {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+        }
+
+        .role {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: black;
+        }
+
+        .line {
+            margin-top: -50px;
+            margin-bottom: 165px;
+        }
+
+        .role img {
+            width: 160px;
+            height: 160px;
+            margin-bottom: 10px;
+        }
+
+        .role span {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .role:hover {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
+
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                width: 0;
+                height: 100%;
+                overflow: hidden;
+                transition: width 0.3s;
+            }
+
+            .role-container {
+                margin-left: 0;
+            }
+
+            .burger-menu {
+                display: block;
+            }
+
+            .role-selection {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                padding: 20px;
+            }
+
+            .sidebar.responsive {
+                width: 200px;
+                background-color: #ffffff;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar" id="mySidebar">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
+        <a href="profile.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="Profile Icon">
+            <span>Profile</span>
+        </a>
+        <a href="home.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/home.png" alt="Home Icon">
+            <span>Home</span>
+        </a>
+        <a href="library.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/book.png" alt="My Library Icon">
+            <span>My Library</span>
+        </a>
+        <a href="cart.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/shopping-cart.png" alt="My Cart Icon">
+            <span>My Cart</span>
+        </a>
+        <div class="sidebar-item discover">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/search.png" alt="Discover Icon">
+            <span>Discover</span>
+            <div class="dropdown-content">
+                <a href="events.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/calendar.png" alt="Events Icon">Events</a>
+                <a href="facility.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/building.png" alt="Facility Icon">Facility</a>
+                <a href="contact.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/contacts.png" alt="Contact Icon">Contact</a>
+            </div>
+        </div>
+        <a href="ask.html" class="sidebar-item ask">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/communication.png" alt="Ask Icon">
+            <span>Ask</span>
+        </a>
+    </div>
+    <span class="burger-menu" onclick="toggleSidebar()">&#9776;</span>
+    <div class="role-container">
+        <div class="line"><h1>Login as:</h1></div>
+        <div class="role-selection">
+            <a href="adminlogin.html" class="role">
+                <img src="images/user.png" alt="Admin">
+                <span>Admin</span>
+            </a>
+            <a href="teacherlogin.html" class="role">
+                <img src="images/user.png" alt="Teacher">
+                <span>Teacher</span>
+            </a>
+            <a href="librarianlogin.html" class="role">
+                <img src="images/user.png" alt="Librarian">
+                <span>Librarian</span>
+            </a>
+            <a href="userlogin.html" class="role">
+                <img src="images/user2.png" alt="User">
+                <span>User</span>
+            </a>
+        </div>
+    </div>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('mySidebar');
+            if (sidebar.style.width === '200px') {
+                sidebar.style.width = '0';
+            } else {
+                sidebar.style.width = '200px';
+            }
+        }
+    </script>
+</body>
+</html>

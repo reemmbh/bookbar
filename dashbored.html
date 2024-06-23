@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Bar Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+</head>
+
+
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
+        <a href="profile.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="Profile Icon">
+            <span>Profile</span>
+        </a>
+        <a href="home.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/home.png" alt="Home Icon">
+            <span>Home</span>
+        </a>
+        <a href="library.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/book.png" alt="My Library Icon">
+            <span>My Library</span>
+        </a>
+        <a href="cart.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/shopping-cart.png" alt="My Cart Icon">
+            <span>My Cart</span>
+        </a>
+        <div class="sidebar-item discover">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/search.png" alt="Discover Icon">
+            <span>Discover</span>
+            <div class="dropdown-content">
+                <a href="events.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/calendar.png" alt="Events Icon">Events</a>
+                <a href="facility.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/building.png" alt="Facility Icon">Facility</a>
+                <a href="contact.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/contacts.png" alt="Contact Icon">Contact</a>
+            </div>
+        </div>
+        <a href="ask.html" class="sidebar-item ask">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/communication.png" alt="Ask Icon">
+            <span>Ask</span>
+        </a>
+    </div>
+    <div class="dash-main-content">
+        <div class="dash-settings-icon">
+            <i class="fas fa-cog"></i>
+        </div>
+        <div class="dash-dashboard-header">
+            <h2>Dashboard</h2>
+        </div>
+        <div class="dash-cards">
+            <div class="dash-card">
+                <div class="dash-icon"><i class="fas fa-book"></i></div>
+                <h3>Add New Book</h3>
+                <p>Total Books in Library: 366</p>
+                <div class="dash-plus" onclick="showAddBookForm()"><i class="fas fa-plus"></i></div>
+            </div>
+            <div class="dash-card">
+                <div class="dash-icon"><i class="fas fa-user"></i></div>
+                <h3>Add New Student</h3>
+                <p>Total Students in Class: 366</p>
+                <div class="dash-plus" onclick="showAddStudentForm()"><i class="fas fa-plus"></i></div>
+            </div>
+            <div class="dash-card">
+                <div class="dash-icon"><i class="fas fa-calendar-plus"></i></div>
+                <h3>Add New Assignment</h3>
+                <p>Total Assignments: 3</p>
+                <div class="dash-plus" onclick="showAddAssignmentForm()"><i class="fas fa-plus"></i></div>
+            </div>
+        </div>
+        <div class="dash-stats">
+            <div class="dash-chart">
+                <h3>
+                    Course Status
+                    <span class="dash-menu"><i class="fas fa-ellipsis-v"></i></span>
+                </h3>
+                <div>
+                    <!-- Placeholder for chart -->
+                    <img src="images/graph2.png"  width="200px" height="190" alt="Course Status">
+                </div>
+            </div>
+            <div class="dash-chart">
+                <h3>
+                    Weekly Status
+                    <span class="dash-menu"><i class="fas fa-ellipsis-v"></i></span>
+                </h3>
+                <div>
+                    <!-- Placeholder for chart -->
+                    <img src="images/graph.png" width="310px" alt="Weekly Status">
+                </div>
+            </div>
+            <div class="dash-notifications">
+                <h3>
+                    Notifications
+                    <span class="dash-menu"><i class="fas fa-ellipsis-v"></i></span>
+                </h3>
+                <div class="dash-tabs">
+                    <span class="dash-active" onclick="showNotifications('oneDay')">One day</span>
+                    <span onclick="showNotifications('oneWeek')">One Week</span>
+                    <span onclick="showNotifications('oneMonth')">One Month</span>
+                </div>
+                <div class="dash-line"></div>
+                <div id="oneDay" class="notification-content">
+                    <p>Students improved reading skills and expanded their vocabulary impressively.</p>
+                    <p>Students have expanded their reading preferences.</p>
+                    <p>Participation in library reading programs has scored over 70% of students in the 7th grade.</p>
+                </div>
+                <div id="oneWeek" class="notification-content" style="display: none;">
+                    <p>Weekly notification 1.</p>
+                    <p>Weekly notification 2.</p>
+                    <p>Weekly notification 3.</p>
+                    <p>Weekly notification 4.</p>
+
+                </div>
+                <div id="oneMonth" class="notification-content" style="display: none;">
+                    <p>Monthly notification 1.</p>
+                    <p>Monthly notification 2.</p>
+                    <p>Monthly notification 3.</p>
+                    <p>Monthly notification 4.</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="dash-activities">
+            <h3>Activities</h3>
+            <ul>
+                <li><span class="dash-circle">1</span>Practicing literacy skills through reading assignments and writing essays. Moreover, using sentences from the book to infer the meaning of unfamiliar words.</li>
+                <li><span class="dash-circle">2</span>Engaging in group or individual projects that require research and creativity.</li>
+                <li><span class="dash-circle">3</span>Drawing scenes or characters from the book. In addition to acting out scenes from the book.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Add Book Form -->
+    <div id="addBookForm" class="dash-book-form-container">
+        <div class="dash-form-header">
+            <h2>Add New Book</h2>
+            <button class="dash-close-btn" onclick="closeAddBookForm()">&times;</button>
+        </div>
+        <form>
+            <label for="bookTitle">Book Title</label>
+            <input type="text" id="bookTitle" name="bookTitle" required>
+
+            <label for="bookAuthor">Book Author</label>
+            <input type="text" id="bookAuthor" name="bookAuthor" required>
+
+            <label for="bookGenre">Book Genre</label>
+            <input type="text" id="bookGenre" name="bookGenre" required>
+
+            <label for="bookYear">Year Published</label>
+            <input type="text" id="bookYear" name="bookYear" required>
+
+            <div class="dash-buttons">
+                <button type="button" class="dash-back-btn" onclick="closeAddBookForm()">Back</button>
+                <button type="submit" class="dash-add-btn">Add Book</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Add Assignment Form -->
+    <div id="addAssignmentForm" class="dash-assignment-form-container">
+        <div class="dash-form-header">
+            <h2>Select a Book for the Assignment</h2>
+            <button class="dash-close-btn" onclick="closeAddAssignmentForm()">&times;</button>
+        </div>
+        <div class="search-bar">
+        </div>
+        <div class="dash-book-list">
+            <div class="dash-book-item">
+                <img src="images/book1.jpeg" alt="Book Thumbnail">
+                <span>Yellow Book</span>
+                <button onclick="showAssignmentInfoForm()">Select</button>
+            </div>
+            <div class="dash-book-item">
+                <img src="images/book2.jpeg" alt="Book Thumbnail">
+                <span>Maybe Now</span>
+                <button onclick="showAssignmentInfoForm()">Select</button>
+            </div>
+            <div class="dash-book-item">
+                <img src="images/book3.jpeg" alt="Book Thumbnail">
+                <span>The Chemistry lab</span>
+                <button onclick="showAssignmentInfoForm()">Select</button>
+            </div>
+            <div class="dash-book-item">
+                <img src="images/book4.jpeg" alt="Book Thumbnail">
+                <span>Harry Potter</span>
+                <button onclick="showAssignmentInfoForm()">Select</button>
+            </div>
+            <!-- Add more book items as needed -->
+        </div>
+    </div>
+
+    <!-- Assignment Info Form -->
+    <div id="assignmentInfoForm" class="dash-assignment-info-container">
+        <div class="dash-form-header">
+            <button class="dash-close-btn" onclick="closeAssignmentInfoForm()">&times;</button>
+        </div>
+        <form id="assignmentForm" class="form-body">
+            <label for="assignmentName">Assignment Name</label>
+            <input type="text" id="assignmentName" name="assignmentName" required>
+
+            <label for="dueDate">Due Date</label>
+            <div class="dash-date-picker">
+                <input type="text" id="dueDate" name="dueDate" placeholder="Date / Month / Year" required>
+                <span class="dash-calendar-icon"><i class="fas fa-calendar-alt"></i></span>
+            </div>
+
+            <label for="question1">Question 1</label>
+            <input type="text" id="question1" name="question1" required>
+
+            <label for="question2">Question 2</label>
+            <input type="text" id="question2" name="question2" required>
+
+            <label for="question3">Question 3</label>
+            <input type="text" id="question3" name="question3" required>
+
+            <div class="dash-buttons">
+                <button type="button" class="dash-back-btn" onclick="closeAssignmentInfoForm()">Back</button>
+                <button type="submit" class="dash-add-btn">Publish</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Add Student Form -->
+    <div id="addStudentForm" class="dash-student-form-container">
+        <div class="dash-form-header">
+            <h2>Add New Student</h2>
+            <button class="dash-close-btn" onclick="closeAddStudentForm()">&times;</button>
+        </div>
+        <form id="studentForm">
+            <label for="studentFirstName">Student First Name</label>
+            <input type="text" id="studentFirstName" name="studentFirstName" required>
+
+            <label for="studentLastName">Student Last Name</label>
+            <input type="text" id="studentLastName" name="studentLastName" required>
+
+            <label for="studentID">Student ID</label>
+            <input type="text" id="studentID" name="studentID" required>
+
+            <label for="studentEmail">Student Email</label>
+            <input type="email" id="studentEmail" name="studentEmail" required>
+
+            <label for="studentYear">Year</label>
+            <input type="text" id="studentYear" name="studentYear" required>
+
+            <label for="studentPhone">Phone Number</label>
+            <input type="text" id="studentPhone" name="studentPhone" required>
+
+            <div class="dash-buttons">
+                <button type="button" class="dash-back-btn" onclick="closeAddStudentForm()">Back</button>
+                <button type="submit" class="dash-add-btn">Add Student</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="hamburger-menu" onclick="toggleSidebar()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        function showAddBookForm() {
+            document.getElementById('addBookForm').style.display = 'block';
+        }
+    
+        function closeAddBookForm() {
+            document.getElementById('addBookForm').style.display = 'none';
+        }
+    
+        function showAddStudentForm() {
+            document.getElementById('addStudentForm').style.display = 'block';
+        }
+    
+        function closeAddStudentForm() {
+            document.getElementById('addStudentForm').style.display = 'none';
+        }
+    
+        function showAddAssignmentForm() {
+            document.getElementById('addAssignmentForm').style.display = 'block';
+            document.getElementById('assignmentInfoForm').style.display = 'none';
+        }
+    
+        function closeAddAssignmentForm() {
+            document.getElementById('addAssignmentForm').style.display = 'none';
+        }
+    
+        function showAssignmentInfoForm() {
+            document.getElementById('assignmentInfoForm').style.display = 'block';
+            document.getElementById('addAssignmentForm').style.display = 'none';
+        }
+    
+        function closeAssignmentInfoForm() {
+            document.getElementById('assignmentInfoForm').style.display = 'none';
+            document.getElementById('addAssignmentForm').style.display = 'block';
+        }
+    
+        function showNotifications(period) {
+            var periods = ['oneDay', 'oneWeek', 'oneMonth'];
+            periods.forEach(function(item) {
+                document.getElementById(item).style.display = (item === period) ? 'block' : 'none';
+            });
+            document.querySelectorAll('.dash-tabs span').forEach(function(tab) {
+                tab.classList.remove('dash-active');
+            });
+            event.target.classList.add('dash-active');
+        }
+    
+        $(function() {
+            $("#dueDate").datepicker({
+                dateFormat: "dd/mm/yy"
+            });
+    
+            $(".dash-calendar-icon").on("click", function() {
+                $("#dueDate").focus();
+            });
+    
+            $("#assignmentForm").on("submit", function(event) {
+                event.preventDefault(); // Prevent the form from submitting
+                showNotification("The assignment was published successfully.");
+                closeAssignmentInfoForm();
+            });
+    
+            $("#studentForm").on("submit", function(event) {
+                event.preventDefault(); // Prevent the form from submitting
+                showNotification("The student was added successfully.");
+                closeAddStudentForm();
+            });
+    
+            $(document).on('click', function(event) {
+                if (!$(event.target).closest('.sidebar, .hamburger-menu').length) {
+                    $('.sidebar').removeClass('open');
+                }
+            });
+    
+            $('.hamburger-menu').on('click', function() {
+                $('.sidebar').toggleClass('open');
+            });
+        });
+    
+        function showNotification(message) {
+            var notification = document.createElement("div");
+            notification.className = "notification";
+            notification.innerHTML = "<p>" + message + "</p>";
+            document.body.appendChild(notification);
+    
+            setTimeout(function() {
+                notification.classList.add("show");
+            }, 100);
+    
+            setTimeout(function() {
+                notification.classList.remove("show");
+                document.body.removeChild(notification);
+            }, 3000);
+        }
+    </script>
+    
+</body>
+</html>

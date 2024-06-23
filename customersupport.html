@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Bar - City Library</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="hamburger-menu" onclick="toggleSidebar()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
+    <div class="sidebar">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
+        <a href="profile.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="Profile Icon">
+            <span>Profile</span>
+        </a>
+        <a href="home.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/home.png" alt="Home Icon">
+            <span>Home</span>
+        </a>
+        <a href="library.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/book.png" alt="My Library Icon">
+            <span>My Library</span>
+        </a>
+        <a href="cart.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/shopping-cart.png" alt="My Cart Icon">
+            <span>My Cart</span>
+        </a>
+        <div class="sidebar-item discover">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/search.png" alt="Discover Icon">
+            <span>Discover</span>
+            <div class="dropdown-content">
+                <a href="events.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/calendar.png" alt="Events Icon">Events</a>
+                <a href="facility.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/building.png" alt="Facility Icon">Facility</a>
+                <a href="contact.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/contacts.png" alt="Contact Icon">Contact</a>
+            </div>
+        </div>
+        <a href="ask.html" class="sidebar-item ask">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/communication.png" alt="Ask Icon">
+            <span>Ask</span>
+        </a>
+    </div>
+    <div class="customersupport-main">
+        <div class="customersupport-header">
+            <a href="liboptions.html"> <button class="customersupport-back-button">Back</button></a>
+            <h2>Customer Support</h2>
+        </div>
+        <div class="customersupport-support-messages">
+            <div class="customersupport-message">
+                <div class="customersupport-message-content">
+                    <strong>Ahmed Ali</strong> <span>23h ago</span>
+                    <p>What upcoming events or programs does the library have?</p>
+                </div>
+                <button class="customersupport-reply-button">Reply</button>
+            </div>
+            <div class="customersupport-message">
+                <div class="customersupport-message-content">
+                    <strong>Sara Ali</strong> <span>2 days ago</span>
+                    <p>Do you have access to digital or e-books, and how can I access them?</p>
+                </div>
+                <button class="customersupport-reply-button">Reply</button>
+            </div>
+            <div class="customersupport-message">
+                <div class="customersupport-message-content">
+                    <strong>Aalia Salim</strong> <span>1 week ago</span>
+                    <p>What services does the library offer for individuals with disabilities?</p>
+                </div>
+                <button class="customersupport-reply-button">Reply</button>
+            </div>
+            <div class="customersupport-message">
+                <div class="customersupport-message-content">
+                    <strong>Fatma Ahmed</strong> <span>1 month ago</span>
+                    <p>How can I reserve a study room or meeting space?</p>
+                </div>
+                <button class="customersupport-reply-button">Reply</button>
+            </div>
+            <div class="customersupport-message">
+                <div class="customersupport-message-content">
+                    <strong>Mohammed Ahmed</strong> <span>1 month ago</span>
+                    <p>How can I reserve a study room?</p>
+                </div>
+                <button class="customersupport-reply-button">Reply</button>
+            </div>
+        </div>
+        <div id="customersupport-chatbox" class="customersupport-chatbox">
+            <div class="customersupport-chatbox-header">
+                <input type="text" placeholder="Search">
+                <i class="fas fa-search"></i>
+                <i class="fas fa-microphone"></i>
+                <button class="customersupport-close-button" onclick="closeChat()">X</button>
+            </div>
+            <div class="customersupport-chatbox-messages">
+                <!-- Chat messages will be added here dynamically -->
+            </div>
+            <div class="customersupport-chatbox-input">
+                <input type="text" id="customersupport-chat-input" placeholder="Write a message...">
+                <i class="fas fa-paperclip"></i>
+                <i class="fas fa-microphone"></i>
+                <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function openChat(userName, userMessage) {
+            document.getElementById('customersupport-chatbox').style.display = 'flex';
+            const chatMessages = document.querySelector('.customersupport-chatbox-messages');
+            chatMessages.innerHTML = `
+                <div class="customersupport-chat-message">
+                    <img src="images/send.png" alt="User Icon">
+                    <div>
+                        <strong>${userName}</strong>
+                        <p>${userMessage}</p>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function closeChat() {
+            document.getElementById('customersupport-chatbox').style.display = 'none';
+        }
+        
+        function sendMessage() {
+            const chatInput = document.getElementById('customersupport-chat-input');
+            if (chatInput.value.trim() !== '') {
+                const chatMessages = document.querySelector('.customersupport-chatbox-messages');
+                const newMessage = document.createElement('div');
+                newMessage.className = 'customersupport-chat-message you';
+                newMessage.innerHTML = `
+                    <div>
+                        <strong>You</strong>
+                        <p>${chatInput.value.trim()}</p>
+                    </div>
+                    <img src="images/lib.png" alt="You Icon">
+                `;
+                chatMessages.appendChild(newMessage);
+                chatInput.value = '';
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                // Save message to localStorage
+                saveMessage('You', chatInput.value.trim());
+            }
+        }
+
+        function saveMessage(sender, message) {
+            const storedMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+            storedMessages.push({ sender, message });
+            localStorage.setItem('chatMessages', JSON.stringify(storedMessages));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load messages from localStorage
+            const storedMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+            const chatMessages = document.querySelector('.customersupport-chatbox-messages');
+            storedMessages.forEach(msg => {
+                const messageElement = document.createElement('div');
+                messageElement.className = 'customersupport-chat-message';
+                messageElement.innerHTML = `
+                    <div>
+                        <strong>${msg.sender}</strong>
+                        <p>${msg.message}</p>
+                    </div>
+                    <img src="images/lib.png" alt="You Icon">
+                `;
+                chatMessages.appendChild(messageElement);
+            });
+
+            document.querySelectorAll('.customersupport-reply-button').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const userName = event.target.closest('.customersupport-message').querySelector('strong').innerText;
+                    const userMessage = event.target.closest('.customersupport-message').querySelector('p').innerText;
+                    openChat(userName, userMessage);
+                });
+            });
+        });
+
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('open');
+        }
+
+        
+        document.addEventListener('click', (event) => {
+            const sidebar = document.querySelector('.sidebar');
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            if (!sidebar.contains(event.target) && !hamburgerMenu.contains(event.target)) {
+                sidebar.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facility</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
+        <a href="profile.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="Profile Icon">
+            <span>Profile</span>
+        </a>
+        <a href="home.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/home.png" alt="Home Icon">
+            <span>Home</span>
+        </a>
+        <a href="library.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/book.png" alt="My Library Icon">
+            <span>My Library</span>
+        </a>
+        <a href="cart.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/shopping-cart.png" alt="My Cart Icon">
+            <span>My Cart</span>
+        </a>
+        <div class="sidebar-item discover">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/search.png" alt="Discover Icon">
+            <span>Discover</span>
+            <div class="dropdown-content">
+                <a href="events.html">
+                    <img src="https://img.icons8.com/ios-filled/24/ffffff/calendar.png" alt="Events Icon">Events</a>
+                
+                <a href="facility.html">
+                    <img src="https://img.icons8.com/ios-filled/24/ffffff/building.png" alt="Facility Icon">Facility</a>
+            
+                <a href="contact.html" >
+                    <img src="https://img.icons8.com/ios-filled/24/ffffff/contacts.png" alt="Contact Icon">Contact</a>
+            </div>
+        </div>
+        <a href="ask.html" class="sidebar-item ask">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/communication.png" alt="Ask Icon">
+            <span>Ask</span>
+        </a>
+    </div>
+    <div class="hamburger-menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <div class="team-container">
+        <div class="team-h1"><h1>Meet with our team</h1></div> 
+        <div class="team-members">
+            <div class="team-member">
+                <img src="images/team1.jpeg" alt="Rand Abubaker">
+                <h3>Rand Abubaker</h3>
+                <div class="social-icons">
+                    <a href="https://x.com/"><i class="fa fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/instagram?igsh=NDFpazRyZTFjN3Fj"><i class="fa fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+                    <a href="mailto:22000934@ug.buid.ac.ae"><i class="fa fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="images/team2.jpeg" alt="Reem Bin Haider">
+                <h3>Reem Bin Haider</h3>
+                <div class="social-icons">
+                    <a href="https://x.com/"><i class="fa fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/instagram?igsh=NDFpazRyZTFjN3Fj"><i class="fa fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+                    <a href="mailto:22001629@ug.buid.ac.ae"><i class="fa fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="images/team3.jpeg" alt="Alia Al Ali">
+                <h3>Alia Al Ali</h3>
+                <div class="social-icons">
+                    <a href="https://x.com/"><i class="fa fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/instagram?igsh=NDFpazRyZTFjN3Fj"><i class="fa fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+                    <a href="mailto:22000826@ug.buid.ac.ae"><i class="fa fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="images/team4.jpeg" alt="Fatma Yousuf">
+                <h3>Fatma Yousuf</h3>
+                <div class="social-icons">
+                    <a href="https://x.com/"><i class="fa fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/instagram?igsh=NDFpazRyZTFjN3Fj"><i class="fa fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+                    <a href="mailto:22000096@ug.buid.ac.ae"><i class="fa fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="images/team5.jpeg" alt="Shaima Abuserdaneh">
+                <h3>Shaima Abuserdaneh</h3>
+                <div class="social-icons">
+                    <a href="https://x.com/"><i class="fa fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/instagram?igsh=NDFpazRyZTFjN3Fj"><i class="fa fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+                    <a href="mailto:22000634@ug.buid.ac.ae"><i class="fa fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const sidebar = document.querySelector('.sidebar');
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+
+            hamburgerMenu.addEventListener('click', () => {
+                sidebar.classList.toggle('open');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!sidebar.contains(e.target) && !hamburgerMenu.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

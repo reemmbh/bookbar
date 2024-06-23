@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Library</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="hamburger-menu" id="hamburger-menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
+        <a href="profile.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="Profile Icon">
+            <span>Profile</span>
+        </a>
+        <a href="home.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/home.png" alt="Home Icon">
+            <span>Home</span>
+        </a>
+        <a href="library.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/book.png" alt="My Library Icon">
+            <span>My Library</span>
+        </a>
+        <a href="cart.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/shopping-cart.png" alt="My Cart Icon">
+            <span>My Cart</span>
+        </a>
+        <div class="sidebar-item discover">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/search.png" alt="Discover Icon">
+            <span>Discover</span>
+            <div class="dropdown-content">
+                <a href="events.html">
+                    <img src="https://img.icons8.com/ios-filled/24/ffffff/calendar.png" alt="Events Icon">Events</a>
+                
+                <a href="facility.html">
+                    <img src="https://img.icons8.com/ios-filled/24/ffffff/building.png" alt="Facility Icon">Facility</a>
+            
+                <a href="contact.html">
+                    <img src="https://img.icons8.com/ios-filled/24/ffffff/contacts.png" alt="Contact Icon">Contact</a>
+            </div>
+        </div>
+        <a href="ask.html" class="sidebar-item ask">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/communication.png" alt="Ask Icon">
+            <span>Ask</span>
+        </a>
+    </div>
+    <div class="library-main-content">
+        <div class="library-club-banner">
+            <img src="images/bookclub.jpeg" alt="Book Club Banner" class="library-club-banner-img">
+            <div class="library-club-info">
+                <h1>Join Our Club</h1>
+                <p>Are you passionate about books, learning, and community? Do you love diving into new worlds through literature and sharing your thoughts with fellow book lovers? Then our Library Club is the perfect place for you!</p>
+                <button>Discover</button>
+            </div>
+        </div>
+
+            <div class="library-search-bar">
+                <input type="text" placeholder="Search" id="library-search-input">
+                <button type="button" id="voice-search-button"><i class="fa fa-microphone"></i></button>
+                <div class="library-search-buttons">
+                    <button type="button" class="library-search-btn">Books</button>
+                    <button type="button" class="library-search-btn">Authors</button>
+                    <button type="button" class="library-search-btn">Genres</button>
+                    <button type="button" class="library-search-btn">Lists</button>
+                    <button type="button" class="library-search-btn"><i class="fa fa-filter"></i> Filter</button>
+                    <button type="button" class="library-search-btn"><i class="fa fa-sort"></i> Sort</button>
+                    <button type="button" class="library-cart-btn"><i class="fa fa-shopping-cart"></i></button>
+                </div>
+            </div>
+            <div class="library-categories">
+                <h2>Books</h2>
+                <br>
+                <div class="library-category-group">
+                    <div class="library-category">
+                        <img src="images/fiction.jpeg" alt="Fiction">
+                        <a href="fiction.html">
+                            <button class="library-category-btn">Fiction<br><span>Factual informative content.</span></button>
+                        </a>
+                    </div>
+                    <div class="library-category">
+                        <img src="images/nonfiction.jpeg" alt="Non-Fiction">
+                        <a href="fiction.html">
+                        <button class="library-category-btn">Non-Fiction<br><span>Factual informative content.</span></button>
+                        </a>
+                    </div>
+                    <div class="library-category">
+                        <img src="images/romance.jpeg" alt="Romance">
+                        <a href="fiction.html">
+                        <button class="library-category-btn">Romance<br><span>Love-focused narratives.</span></button>
+                        </a>
+                    </div>
+                    <div class="library-category">
+                        <img src="images/drama.jpeg" alt="Drama">
+                        <a href="fiction.html">
+                        <button class="library-category-btn">Drama<br><span>Intense emotional conflict.</span></button>
+                        </a>
+                    </div>
+                    <div class="library-category">
+                        <img src="images/bio.jpeg" alt="Biography">
+                        <a href="fiction.html">
+                        <button class="library-category-btn">Biography<br><span>Life story account.</span></button>
+                        </a>
+                    </div>
+                    <div class="library-category">
+                        <img src="images/basic.jpeg" alt="Children's">
+                        <a href="basicchildren.html">
+                        <button class="library-category-btn">Basic Children's<br><span>Young readers' stories.</span></button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="library-main-content">
+                <div class="library-magazine-categories">
+                    <h2>Magazines</h2>
+                    <br>
+                    <div class="library-magazine-category-group">
+                        <div class="library-magazine-category">
+                            <img src="images/music.jpeg" alt="Music">
+                            <a href="magazine.html">
+                            <button class="library-magazine-category-btn">Music<br><span>Musical culture publication.</span></button>
+                            </a>
+                        </div>
+                        <div class="library-magazine-category">
+                            <img src="images/fashion.jpeg" alt="Fashion">
+                            <a href="magazine.html">
+                            <button class="library-magazine-category-btn">Fashion<br><span>Style trends publication.</span></button>
+                            </a>
+                        </div>
+                        <div class="library-magazine-category">
+                            <img src="images/sports.jpeg" alt="Sports">
+                            <a href="magazine.html">
+                            <button class="library-magazine-category-btn">Sports<br><span>Athletic events coverage.</span></button>
+                            </a>
+                        </div>
+                        <div class="library-magazine-category">
+                            <img src="images/photography.jpeg" alt="Photography">
+                            <a href="magazine.html">
+                            <button class="library-magazine-category-btn">Photography<br><span>Visual arts publication.</span></button>
+                            </a>
+                        </div>
+                        <div class="library-magazine-category">
+                            <img src="images/cars.jpeg" alt="Cars">
+                            <a href="magazine.html">
+                            <button class="library-magazine-category-btn">Cars<br><span>Automotive industry insights.</span></button>
+                            </a>
+                        </div>
+                        <div class="library-magazine-category">
+                            <img src="images/comics.jpeg" alt="Comics">
+                            <a href="magazine.html">
+                            <button class="library-magazine-category-btn">Comics<br><span>Illustrated storytelling medium.</span></button>
+                            </a>
+                        </div>
+                        <div class="library-magazine-category">
+                            <img src="images/travel.jpeg" alt="Traveling">
+                            <a href="magazine.html">
+                            <button class="library-magazine-category-btn">Traveling<br><span>Destination exploration guide.</span></button>
+                            </a>
+                        </div>
+                        <div class="library-magazine-category">
+                            <img src="images/enter.jpeg" alt="Entertainment">
+                            <a href="magazine.html">
+                            <button class="library-magazine-category-btn">Entertainment<br><span>Celebrity lifestyle features.</span></button>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="library-main-content">
+                <div class="library-authors-section">
+                    <h2>Authors</h2>
+                    <br>
+                    <div class="library-authors-group">
+                        <div class="library-author">
+                            <div class="library-author-btn">
+                                <span>Top<br>Authors</span>
+                                <img src="images/topA.jpeg" alt="Top Authors">
+                            </div>
+                        </div>
+                        <div class="library-author">
+                            <div class="library-author-btn">
+                                <span>Female<br>Authors</span>
+                                <img src="images/femaleA.jpeg" alt="Female Authors">
+                            </div>
+                        </div>
+                        <div class="library-author">
+                            <div class="library-author-btn">
+                                <span>Male<br>Authors</span>
+                                <img src="images/maleA.jpeg" alt="Male Authors">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="library-meeting-rooms-section">
+                <h2>Meeting Rooms</h2>
+                <div class="library-carousel-wrapper">
+                    <button class="library-prev">&lt;</button>
+                    <div class="library-carousel">
+                        <div class="library-carousel-item"><img src="images/newmeeting.jpg" alt="Meeting Room 1"></div>
+                        <div class="library-carousel-item"><img src="images/newmeeting2.jpg" alt="Meeting Room 2"></div>
+                        <div class="library-carousel-item"><img src="images/newmeeting3.jpg" alt="Meeting Room 3"></div>
+                        <div class="library-carousel-item"><img src="images/newmeeting4.jpg" alt="Meeting Room 4"></div>
+                    </div>
+                    <button class="library-next">&gt;</button>
+                </div>
+            </div>
+            <script src="scripts.js"></script>
+        </body>
+        </html>

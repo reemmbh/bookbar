@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Board</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            background-color: #D6536D;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-top: 20px;
+            position: fixed;
+            overflow: hidden;
+        }
+        .sidebar-item.discover {
+            position: relative;
+        }
+
+        .dropdown-content a img {
+            margin-right: 10px;
+            width: 19px;
+            height: 19px;
+            margin-bottom: -4px;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #D6536D;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            top: 100%;
+            left: 0;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #d94462;
+        }
+
+        .sidebar-item.discover:hover .dropdown-content {
+            display: block;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+
+        .logo img {
+            width: 150px;
+            height: 150px;
+            margin-bottom: -10px;
+        }
+
+        .sidebar-item {
+            width: 100%;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 5px;
+            width: calc(100% - 20px);
+            padding: 15px 10px;
+        }
+
+        .sidebar-item img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .sidebar-item:hover {
+            background-color: #d94462;
+        }
+
+        .ask {
+            margin-top: auto;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+        .container {
+            margin-left: 200px;
+            padding: 20px;
+            color: rgb(41, 41, 43);
+            text-align: center;
+            height: 30vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-bar {
+            margin-left: 200px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            margin-top: -40px;
+        }
+
+        #search-input {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+
+        #search-button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #e8e4d1;
+            color: white;
+            cursor: pointer;
+            border-radius: 0 4px 4px 0;
+            outline: none;
+            color: black;
+        }
+
+        #search-button:hover {
+            background-color: #e7e2c9;
+        }
+
+        .sort-filter-buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin-right: 10px;
+            margin-top: 3px;
+            margin-top: -20px;
+        }
+
+        #sort-button, #filter-button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            background-color: #dedcdc;
+            color: black;
+            cursor: pointer;
+            border-radius: 4px;
+            outline: none;
+            display: flex;
+            align-items: center;
+        }
+
+        #sort-button i, #filter-button i {
+            margin-right: 10px;
+        }
+
+        #sort-button:hover, #filter-button:hover {
+            background-color: #cdcccc;
+        }
+        .photo-slider-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-left: 200px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            position: relative;
+        }
+
+        .book-covers {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            margin-right: 100px;
+        }
+
+        .cover-pair {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .book-cover {
+            width: 120px;
+            height: 180px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .task-board {
+            margin-left: 220px;
+            padding: 20px;
+        }
+
+        .task-board h2 {
+            text-align: left;
+            font-size: 24px;
+            margin: 20px 0 10px;
+        }
+
+        .todo-container, .done-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .todo-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .todo-container .task-card {
+            margin-top: 20px;
+        }
+
+        .task-card {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            font-size: 18px;
+            color: #29292b;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .done-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .done-container .task-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .task-card .status {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .green {
+            background-color: green;
+        }
+
+        .yellow {
+            background-color: yellow;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .assignment1, .assignment3 {
+            align-self: start;
+        }
+
+        .assignment2, .assignment4 {
+            align-self: end;
+            margin-left: 5.5cm;
+        }
+
+        .assignment-detail {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 70px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .assignment-detail input {
+            border: 1px solid black;
+            padding: 10px;
+            width: 100%;
+            border-radius: 20px;
+            padding-left: 20px;
+            font-size: 16px;
+            padding-right: 30px;
+        }
+
+        .assignment-detail button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .assignment-detail .back {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            color: black;
+        }
+
+        .grade-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+
+        z-index: 1000;
+    }
+
+    .grade-popup .back {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        cursor: pointer;
+        color: black;
+    }
+
+    .grade-popup h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .grade-popup p {
+        font-size: 18px;
+    }
+
+    .done-container .task-card {
+        cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+        .sidebar {
+            transform: translateX(-100%);
+            position: absolute;
+            z-index: 1001;
+            background-color: #D6536D;
+            transition: transform 0.3s ease;
+        }
+    
+        .sidebar.open {
+            transform: translateX(0);
+        }
+    
+        .hamburger-menu {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 30px;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 1002; /* Ensure it's above the sidebar */
+        }
+    
+        .hamburger-menu .bar {
+            width: 100%;
+            height: 3px;
+            background-color: #d94462; /* Make the bars white for contrast */
+        }
+    
+    
+        .main-content {
+            width: 100%;
+            margin-left: 0;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        .container {
+            margin-left: 0;
+        }
+    
+        .search-bar {
+            margin-left: 0;
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        .sort-filter-buttons {
+            justify-content: center;
+        }
+    
+        .todo-container {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+        }
+    
+        .photo-slider-wrapper {
+            margin-left: 0;
+        }
+    
+        .task-board {
+            margin-left: 0;
+            padding: 10px;
+        }
+    }
+    
+    
+</style>
+</head>
+<body>
+    <div class="hamburger-menu" onclick="toggleSidebar()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
+        <a href="profile.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="Profile Icon">
+            <span>Profile</span>
+        </a>
+        <a href="home.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/home.png" alt="Home Icon">
+            <span>Home</span>
+        </a>
+        <a href="library.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/book.png" alt="My Library Icon">
+            <span>My Library</span>
+        </a>
+        <a href="cart.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/shopping-cart.png" alt="My Cart Icon">
+            <span>My Cart</span>
+        </a>
+        <div class="sidebar-item discover">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/search.png" alt="Discover Icon">
+            <span>Discover</span>
+            <div class="dropdown-content">
+                <a href="events.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/calendar.png" alt="Events Icon">Events</a>
+                <a href="facility.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/building.png" alt="Facility Icon">Facility</a>
+                <a href="contact.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/contacts.png" alt="Contact Icon">Contact</a>
+            </div>
+        </div>
+        <a href="ask.html" class="sidebar-item ask">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/communication.png" alt="Ask Icon">
+            <span>Ask</span>
+        </a>
+    </div>
+
+<div class="task-board">
+    <h2>To Do:</h2>
+    <div class="todo-container">
+        <div class="task-card assignment1" data-assignment="1">Assignment 1<br>Ms. Alia Al Ali</div>
+        <div class="task-card assignment3" data-assignment="3">Assignment 3<br>Ms. Alia Al Ali</div>
+        <div class="task-card assignment2" data-assignment="2">Assignment 2<br>Ms. Alia Al Ali</div>
+        <div class="task-card assignment4" data-assignment="4">Assignment 4<br>Ms. Alia Al Ali</div>
+    </div>
+    <h2>Done:</h2>
+    <div class="done-container">
+        <div class="task-card" data-completed="Assignment 1">Assignment 1<br>Ms. Alia Al Ali<div class="status green"></div></div>
+        <div class="task-card" data-completed="Quiz 1">Quiz 1<br>Ms. Alia Al Ali<div class="status yellow"></div></div>
+        <div class="task-card" data-completed="Quiz 2">Quiz 2<br>Ms. Alia Al Ali<div class="status red"></div></div>
+    </div>
+</div>
+
+<div class="assignment-detail" id="assignmentDetail">
+    <span class="back" onclick="closeDetail()">< back</span>
+    <h2>Assignment Details</h2>
+    <p id="bookTitle"></p>
+    <label for="dueDate">Due Date</label>
+    <div>
+        <input type="text" id="dueDate" placeholder="Date / Month / Year" readonly>
+    </div>
+    <button onclick="testMe()">✔ Test Me</button>
+</div>
+
+<div class="grade-popup" id="gradePopup">
+    <span class="back" onclick="closeGradePopup()">< back</span>
+    <h2>Assignment Grades</h2>
+    <p id="gradeDetails"></p>
+</div>
+
+<script>
+    const taskCards = document.querySelectorAll('.task-card[data-assignment]');
+    const assignmentDetail = document.getElementById('assignmentDetail');
+    const gradePopup = document.getElementById('gradePopup');
+    const completedTasks = document.querySelectorAll('.task-card[data-completed]');
+
+    const assignments = {
+        1: { dueDate: '01/07/2024', book: 'Maybe you' },
+        2: { dueDate: '08/07/2024', book: 'Pink mind' },
+        3: { dueDate: '15/07/2024', book: 'History' },
+        4: { dueDate: '22/07/2024', book: 'slammed' },
+    };
+
+    const grades = {
+        'Assignment 1': 'A',
+        'Quiz 1': 'B+',
+        'Quiz 2': 'B-'
+    };
+
+    taskCards.forEach(card => {
+        card.addEventListener('click', () => {
+            showDetail(card.dataset.assignment);
+        });
+    });
+
+    completedTasks.forEach(task => {
+        task.addEventListener('click', () => {
+            showGrades(task.dataset.completed);
+        });
+    });
+
+    function showDetail(assignmentNumber) {
+        const assignment = assignments[assignmentNumber];
+        assignmentDetail.querySelector('h2').textContent = `Assignment ${assignmentNumber} Details`;
+        document.getElementById('bookTitle').textContent = `Read: ${assignment.book}`;
+        document.getElementById('dueDate').value = assignment.dueDate;
+        assignmentDetail.style.display = 'block';
+    }
+
+    function closeDetail() {
+        assignmentDetail.style.display = 'none';
+    }
+
+    function showGrades(taskName) {
+        gradePopup.querySelector('h2').textContent = `${taskName} Grades`;
+        document.getElementById('gradeDetails').textContent = `Grade: ${grades[taskName] || 'N/A'}`;
+        gradePopup.style.display = 'block';
+    }
+
+    function closeGradePopup() {
+        gradePopup.style.display = 'none';
+    }
+
+    function testMe() {
+        window.location.href = 'question.html';
+    }
+
+ 
+    function toggleSidebar() {
+        const sidebar = document.querySelector('.sidebar');
+        sidebar.classList.toggle('open');
+    }
+    
+    document.addEventListener('click', function (event) {
+        const sidebar = document.querySelector('.sidebar');
+        const hamburger = document.querySelector('.hamburger-menu');
+        if (!sidebar.contains(event.target) && !hamburger.contains(event.target)) {
+            sidebar.classList.remove('open');
+        }
+    });
+    
+</script>
+</body>
+</html>

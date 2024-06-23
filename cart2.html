@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Bar - Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* Set the page background to white */
+        }
+
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            background-color: #D6536D;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-top: 20px;
+            position: fixed;
+            overflow: hidden; /* Ensure content doesn't overflow */
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 30px;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger-menu .bar {
+            width: 100%;
+            height: 3px;
+            background-color: pink;
+        }
+
+        .dropdown-content a img {
+            margin-right: 10px; /* Space between icon and text */
+            width: 19px; /* Adjust icon size */
+            height: 19px; /* Adjust icon size */
+            margin-bottom: -4px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #D6536D;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            top: 100%; /* Adjust to position below the Discover item */
+            left: 0;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #d94462;
+        }
+
+        .sidebar-item.discover:hover .dropdown-content {
+            display: block;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+
+        .logo img {
+            width: 150px; /* Increased size */
+            height: 150px; /* Increased size */
+            margin-bottom: -10px;
+        }
+
+        .logo span {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .sidebar-item {
+            width: 100%;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 5px; /* Reduced space between items */
+            width: calc(100% - 20px); /* Adjust width to ensure it fits inside */
+            padding: 15px 10px;
+        }
+
+        .sidebar-item img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .sidebar-item:hover {
+            background-color: #d94462; /* Slightly darker shade */
+        }
+
+        .ask {
+            margin-top: auto;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            margin-left: 200px; /* Adjust to match sidebar width */
+            padding: 20px;
+            background-color: #ffffff; /* Set the container background to white */
+            color: rgb(41, 41, 43);
+            text-align: center;
+            min-height: 100vh; /* Increase container height */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Adjusted alignment */
+        }
+
+        .payment-container {
+            padding: 20px;
+            background-color: #f7f4ee; /* Match the provided background color */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 600px; /* Make the box wider */
+            margin-top: 50px; /* Move the box down */
+            text-align: left;
+            position: relative;
+            min-height: 300px; /* Ensure there's enough height to avoid overlap */
+        }
+
+        .payment-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .payment-container .form-group {
+            margin-bottom: 15px;
+        }
+
+        .payment-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .payment-container .payment-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .payment-container .payment-option img {
+            margin-right: 10px;
+        }
+
+        .payment-container input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .payment-container .promotion-code {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .promotion-code-input {
+            display: flex;
+            align-items: center;
+        }
+
+        .payment-container .promotion-code label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .payment-container .promotion-code input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .payment-container .promotion-code button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #e8e4d1;
+            color: black;
+            cursor: pointer;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .payment-container .promotion-code button:hover {
+            background-color: #e7e2c9;
+        }
+
+        .payment-container .items {
+            margin-bottom: 60px; /* Add space below items to avoid overlap */
+        }
+
+        .payment-container .items p {
+            margin: 5px 0; /* Reduce space between items */
+        }
+
+        .payment-container .total {
+            font-size: 18px;
+            font-weight: bold;
+            position: absolute;
+            bottom: 20px; /* Move total down */
+            left: 20px;
+        }
+
+        .payment-container .pay-now {
+            position: absolute;
+            bottom: 20px; /* Move button down */
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .payment-container .pay-now:hover {
+            background-color: #45a049;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            background-color: #f7f4ee; /* Match the provided background color */
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .back-button {
+            background-color: #fff;
+            border: none;
+            color: #000;
+            padding: 8px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-right: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-button:hover {
+            background-color: #e7e2c9;
+        }
+
+        .header h2 {
+            margin: 0;
+            flex: 1;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger-menu {
+                display: flex;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .container {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .payment-container {
+                width: 100%;
+                padding: 10px;
+                box-shadow: none;
+            }
+
+            .payment-container .total,
+            .payment-container .pay-now {
+                position: static;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hamburger-menu" onclick="toggleSidebar()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
+    <div class="sidebar">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
+        <a href="profile.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="Profile Icon">
+            <span>Profile</span>
+        </a>
+        <a href="home.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/home.png" alt="Home Icon">
+            <span>Home</span>
+        </a>
+        <a href="library.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/book.png" alt="My Library Icon">
+            <span>My Library</span>
+        </a>
+        <a href="cart.html" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/shopping-cart.png" alt="My Cart Icon">
+            <span>My Cart</span>
+        </a>
+        <div class="sidebar-item discover">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/search.png" alt="Discover Icon">
+            <span>Discover</span>
+            <div class="dropdown-content">
+                <a href="events.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/calendar.png" alt="Events Icon">Events</a>
+                <a href="facility.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/building.png" alt="Facility Icon">Facility</a>
+                <a href="contact.html"><img src="https://img.icons8.com/ios-filled/16/ffffff/contacts.png" alt="Contact Icon">Contact</a>
+            </div>
+        </div>
+        <a href="ask.html" class="sidebar-item ask">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/communication.png" alt="Ask Icon">
+            <span>Ask</span>
+        </a>
+    </div>
+    <div class="container">
+        <div class="payment-container">
+            <div class="header">
+                <button class="back-button" onclick="history.back()">Back</button>
+                <h2>Payment</h2>
+            </div>
+            <div class="form-group">
+                <label>Choose a payment method</label>
+                <div class="payment-option">
+                    <input type="radio" id="credit-card" name="payment-method" value="credit-card">
+                    <label for="credit-card"><img src="https://img.icons8.com/ios-filled/24/000000/bank-cards.png"/> Credit Card</label>
+                </div>
+                <div class="payment-option">
+                    <input type="radio" id="cash" name="payment-method" value="cash">
+                    <label for="cash"><img src="https://img.icons8.com/ios-filled/24/000000/cash.png"/> Cash</label>
+                </div>
+                <div class="payment-option">
+                    <input type="radio" id="gift-card" name="payment-method" value="gift-card">
+                    <label for="gift-card"><img src="https://img.icons8.com/ios-filled/24/000000/gift-card.png"/> Gift Card</label>
+                </div>
+            </div>
+            <div class="form-group promotion-code">
+                <label for="promotion-code">Promotion Code</label>
+                <div class="promotion-code-input">
+                    <input type="text" id="promotion-code" placeholder="Enter code">
+                    <button>Apply</button>
+                </div>
+            </div>
+            <div class="items">
+                <p>The Five Dollar Smile</p>
+                <p>The Diary Of A CEO</p>
+                <p>Vogue</p>
+            </div>
+            <div class="total">
+                <p>Total: $93</p>
+            </div>
+            <a href="cart3.html" class="pay-now">Pay Now</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('open');
+        }
+
+    
+            function showNotification() {
+                document.getElementById('notification').style.display = 'block';
+            }
+    
+            function closeNotification() {
+                document.getElementById('notification').style.display = 'none';
+            }
+        </script>
+    </script>
+</body>
+</html>

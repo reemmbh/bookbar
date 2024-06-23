@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gulf Business</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            background-color: #D6536D;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-top: 20px;
+            position: fixed;
+            overflow: hidden;
+            transition: width 0.3s;
+            z-index: 1001;
+        }
+
+        .sidebar.collapsed {
+            width: 60px;
+        }
+
+        .sidebar.collapsed .sidebar-item span {
+            display: none;
+        }
+
+        .sidebar.collapsed .logo img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .sidebar-item {
+            width: 100%;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-item img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .sidebar-item:hover {
+            background-color: #d94462;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+
+        .logo img {
+            width: 150px;
+            height: 150px;
+            margin-bottom: -10px;
+            transition: width 0.3s, height 0.3s;
+        }
+
+        .main-content {
+            margin-left: 200px;
+            padding: 20px;
+            font-size: 20px;
+            transition: margin-left 0.3s;
+            width: 100%;
+        }
+
+        .sidebar.collapsed ~ .main-content {
+            margin-left: 60px;
+        }
+
+        .content-buttons {
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            gap: 10px;
+        }
+
+        .content-buttons button {
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: width 0.3s;
+        }
+
+        .content-buttons button img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .content-buttons button.collapsed {
+            width: 40px;
+            padding: 10px;
+            justify-content: center;
+        }
+
+        .content-buttons button.collapsed span {
+            display: none;
+        }
+
+        .content-buttons button:hover {
+            background-color: #f4f4f4;
+        }
+
+        .back-button {
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            border: none;
+            font-weight: bolder;
+            font-size: 17px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .add-question-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .add-question-modal.collapsed {
+            width: 60px;
+            padding: 10px;
+        }
+
+        .add-question-modal input {
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        .add-question-button {
+            background-color: green;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .close-button {
+            background-color: red;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 30px;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 1002;
+        }
+
+        .hamburger-menu .bar {
+            width: 100%;
+            height: 3px;
+            background-color: pink;
+        }
+
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding-top: 60px;
+            }
+
+            .hamburger-menu {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
+        <a href="#" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="Profile Icon">
+            <span>Profile</span>
+        </a>
+        <a href="#" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/home.png" alt="Home Icon">
+            <span>Home</span>
+        </a>
+        <a href="#" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/book.png" alt="My Library Icon">
+            <span>My Library</span>
+        </a>
+        <a href="#" class="sidebar-item">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/shopping-cart.png" alt="My Cart Icon">
+            <span>My Cart</span>
+        </a>
+        <a href="#" class="sidebar-item discover">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/search.png" alt="Discover Icon">
+            <span>Discover</span>
+        </a>
+        <a href="#" class="sidebar-item ask">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/communication.png" alt="Ask Icon">
+            <span>Ask</span>
+        </a>
+    </div>
+
+    <div class="hamburger-menu" id="hamburger-menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
+    <div class="main-content">
+        <a href="magdetails.html"><button class="back-button">Back</button></a>
+
+        <h1>Gulf Business</h1>
+        <p>Majid Jafar is the CEO of Crescent Petroleum, the oldest private oil and gas company in the Middle East, founded in 1969. He is also the Vice-Chairman of the Crescent Group, a diversified family business group based in Sharjah, UAE. Under his leadership, Crescent Petroleum has significantly shifted its focus from oil to natural gas, which now constitutes about 85% of its production. This transition aligns with global energy trends and the UAE's energy strategy for 2050, which aims to balance renewable with natural gas and other cleaner energy sources.</p>
+        <p>Jafar emphasizes the critical role of natural gas in the energy transition, highlighting its lower carbon footprint and cost-effectiveness compared to other fossil fuels. Crescent Petroleum has expanded its operations across the Middle East, including significant investments in the Kurdistan region of Iraq, where it has developed major gas fields that contribute to local power generation.</p>
+        <p>Jafar advocates for the private sector's role in managing and investing in the oil and gas industry, arguing that private companies can operate more efficiently and cost-effectively than state-run enterprises. He also highlights the importance of addressing global challenges such as energy affordability, availability, and sustainability.</p>
+    </div>
+
+    <div class="content-buttons">
+        <button onclick="toggleButton(this)"><img src="images/head.png" alt="Audio Icon"><span>Audio</span></button>
+        <button onclick="toggleButton(this)"><img src="images/book.png" alt="Dictionary Icon"><span>Dictionary</span></button>
+        <button onclick="toggleButton(this)"><img src="images/bookmark.png" alt="Bookmark Icon"><span>Bookmark</span></button>
+        <button onclick="toggleQuestionModal()"><img src="images/question.png" alt="Ask Questions Icon"><span>Add Questions</span></button>
+    </div>
+
+    <div class="add-question-modal" id="addQuestionModal">
+        <input type="text" placeholder="Add a Question">
+        <input type="text" placeholder="Add a Question">
+        <button class="add-question-button" onclick="addQuestion()">Add</button>
+        <button class="close-button" onclick="toggleQuestionModal()">Close</button>
+    </div>
+
+    <script>
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const sidebar = document.getElementById('sidebar');
+
+        hamburgerMenu.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+
+        function toggleButton(button) {
+            button.classList.toggle('collapsed');
+        }
+
+        function toggleQuestionModal() {
+            const modal = document.getElementById('addQuestionModal');
+            const button = document.querySelector('.content-buttons button:last-child');
+            if (modal.style.display === 'none' || modal.style.display === '') {
+                modal.style.display = 'flex';
+                button.classList.remove('collapsed');
+            } else {
+                modal.style.display = 'none';
+                button.classList.add('collapsed');
+            }
+        }
+
+        function addQuestion() {
+            alert("Question Added!");
+        }
+    </script>
+</body>
+
+</html>
